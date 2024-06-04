@@ -30,7 +30,7 @@ export default [
       typescript({ tsconfig: "./tsconfig.json" }),
       terser(),
       scss({
-        output: "./dist/style/style.css",
+        output: "./dist/infusedui.style.css",
         failOnError: false,
       }),
     ],
