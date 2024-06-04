@@ -1,0 +1,149 @@
+@use "sass:math";
+
+@mixin global($theme) {
+  $colors: map-get($map: $theme, $key: 'colors');
+
+  &.header {
+
+    // Position
+    &.position-fixed {
+      position: fixed;
+    }
+
+    &.position-sticky {
+      position: sticky;
+    }
+
+    display: grid;
+    align-items: center;
+    align-content: center;
+    column-gap: 8px;
+    row-gap: 8px;
+
+    min-height: 72px;
+    border-bottom: 1px solid rgba(map-get($colors, "content"), .3);
+    background: darken($color: map-get($colors, "background_1"), $amount: 5%);
+
+    &.format-row {
+      &.template-nav {
+        grid-template-rows: repeat(2, min-content);
+      }
+    }
+
+    &.format-col {
+      &.template-mobile-menu {
+        @media all and (max-width: 768px) {
+          grid-template-columns: min-content 1fr;
+        }
+      }
+    }
+
+    z-index: 3;
+
+    $iPosition: 0;
+
+    @while $iPosition <=20 {
+      @media all and (min-width: 768px) {
+        &.position-top-#{$iPosition * 8} {
+          top: 8px * $iPosition;
+        }
+
+        &.position-left-#{$iPosition * 8} {
+          left: 8px * $iPosition;
+        }
+
+        &.position-right-#{$iPosition * 8} {
+          right: 8px * $iPosition;
+        }
+
+        &.position-bottom-#{$iPosition * 8} {
+          bottom: 8px * $iPosition;
+        }
+      }
+
+      @media all and (max-width: 768px) {
+        &.xs-position-top-#{$iPosition * 8} {
+          top: 8px * $iPosition;
+        }
+
+        &.xs-position-left-#{$iPosition * 8} {
+          left: 8px * $iPosition;
+        }
+
+        &.xs-position-right-#{$iPosition * 8} {
+          right: 8px * $iPosition;
+        }
+
+        &.xs-position-bottom-#{$iPosition * 8} {
+          bottom: 8px * $iPosition;
+        }
+      }
+
+      $iPosition: $iPosition + 1;
+    }
+
+    &.shadow {
+      box-shadow: 0 4px 12px rgba($color: #000000, $alpha: .2);
+    }
+
+    // Background
+    &.background-effect-blur {
+      backdrop-filter: blur(24px) saturate(180%);
+    }
+
+    &.background-color-main {
+      background-color: map-get($map: $colors, $key: 'main');
+    }
+
+    &.background-color-content {
+      background-color: map-get($map: $colors, $key: 'content');
+      color: map-get($map: $colors, $key: 'background_1');
+    }
+
+    &.background-color-bg1 {
+      background-color: map-get($map: $colors, $key: 'background_1');
+    }
+
+    &.background-color-bg2 {
+      background-color: map-get($map: $colors, $key: 'background_2');
+    }
+
+    &.background-color-bg3 {
+      background-color: map-get($map: $colors, $key: 'background_3');
+    }
+
+    .app-logo {
+      display: grid;
+      align-items: center;
+
+      height: 32px;
+    }
+  }
+}
+
+@mixin company($theme) {
+  $radius: map-get($map: $theme, $key: "radius");
+  $colors: map-get($map: $theme, $key: "colors");
+
+  &.company-name {
+    &.theme-capsule {
+      display: grid;
+      grid-template-columns: 40px 1fr;
+      align-items: center;
+
+      height: 48px;
+      border-radius: map-get($map: $radius, $key: "small");
+      outline: 0 solid rgba(map-get($colors, 'main'), $alpha: .4);
+      outline-offset: 2px;
+      border-style: solid;
+      border-width: 1px;
+      border-color: rgba(map-get($colors, "content"), .3);
+      padding-right: 12px;
+      background-color: darken($color: map-get($colors, "background_1"), $amount: 5%);
+    }
+
+    &.shadow {
+      box-shadow: 0 8px 12px rgba($color: #000000, $alpha: .2);
+    }
+  }
+}

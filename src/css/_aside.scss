@@ -1,0 +1,115 @@
+@use "sass:math";
+
+@mixin global($theme) {
+  $colors: map-get($map: $theme, $key: 'colors');
+  $radius: map-get($map: $theme, $key: 'radius');
+  $schemas_radius: map-get($map: $theme, $key: 'radius_schemas');
+  $color_schemas: map-get($map: $theme, $key: 'color_schemas');
+
+  &.aside-menu {
+
+    ul {
+      li {
+        height: auto;
+        list-style: none;
+        border-radius: map-get($map: $radius, $key: 'small') + 2px;
+        border: 1px solid transparent;
+
+        transition:
+          border-color .3s ease-in-out;
+
+        &.open {
+          border-color: map-get($map: $colors, $key: 'main');
+          background-color: lighten($color: map-get($colors, "background_1"), $amount: 5%);
+
+          @if($color_schemas =="dark") {
+            background-color: darken($color: map-get($colors, "background_1"), $amount: 5%);
+          }
+        }
+      }
+
+      li ul {
+        padding: 0;
+        padding-left: 24px;
+
+        li {
+          border: none;
+        }
+      }
+
+      padding: 40px 0;
+      list-style: none;
+
+      a {
+        display: grid;
+        grid-template-columns: 24px 1fr;
+        grid-auto-flow: column;
+        grid-auto-columns: min-content;
+        grid-template-areas: "icon label";
+        align-items: center;
+        gap: 8px;
+
+        position: relative;
+
+        height: 48px;
+        background: none;
+        border-radius: map-get($map: $radius, $key: 'small');
+        border-width: 1px;
+        border-style: solid;
+        border-color: transparent;
+        box-sizing: border-box;
+        padding: 0 8px;
+
+        @if ($schemas_radius =="circle") {
+          padding-left: 12px;
+        }
+
+        font-weight: 500;
+
+        .icon,
+        .dtc-icon,
+        .loader {
+          grid-area: icon;
+
+          &.more-icon {
+            grid-area: auto;
+          }
+        }
+
+        span {
+          grid-area: label;
+        }
+
+        .tag {
+          position: absolute;
+          right: 4px;
+          top: 50%;
+
+          transform: translateY(-50%);
+          box-shadow: 0 0 8px rgba($color: #000000, $alpha: .3);
+        }
+
+
+        &:hover,
+        &:target,
+        &:focus {
+          outline: none;
+          border-color: rgba(map-get($colors, "content"), .3);
+          background-color: darken($color: map-get($colors, "background_1"), $amount: 5%);
+        }
+
+        &.active {
+          .icon {
+            color: map-get($map: $colors, $key: 'main');
+          }
+
+          &:after {
+            opacity: 1;
+            transform:
+              translateX(-8px) translateY(-50%);
+          }
+        }
+      }
+    }
+  }
+}

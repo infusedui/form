@@ -1,0 +1,430 @@
+@mixin global($theme) {}
+
+@mixin alert($theme) {
+  $colors: map-get($map: $theme, $key: 'colors');
+  $brand: map-get($map: $theme, $key: 'brand');
+  $shades: map-get($map: $theme, $key: 'shades');
+  $radius: map-get($map: $theme, $key: 'radius');
+  $fontsize: map-get($map: $theme, $key: 'fontsize');
+  $color_schemas: map-get($map: $theme, $key: 'color_schemas');
+
+  &.message-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-areas: "content";
+    align-items: center;
+    align-content: center;
+    gap: 12px;
+
+    box-sizing: border-box;
+    min-height: 48px;
+    border-radius: map-get($map: $radius, $key: 'small');
+    border-width: 1px;
+    border-style: solid;
+    border-color: map-get($map: $colors, $key: 'content');
+    padding: 10px;
+    background: map-get($map: $colors, $key: 'background_1');
+
+    &.format-icon {
+      grid-template-columns: 40px 1fr;
+      grid-template-areas: "icon content";
+
+      @media all and (max-width: 768px) {
+        grid-template-columns: 1fr;
+        grid-template-rows: 40px 1fr;
+        grid-template-areas:
+          "icon"
+          "content";
+      }
+    }
+
+    &.format-icon-cta {
+      grid-template-columns: 40px 1fr min-content;
+      grid-template-areas: "icon content cta";
+
+      @media all and (max-width: 768px) {
+        grid-template-columns: 1fr;
+        grid-template-rows: 40px 1fr min-content;
+        grid-template-areas:
+          "icon"
+          "content"
+          "cta";
+      }
+    }
+
+    &.format-cta {
+      grid-template-columns: 1fr min-content;
+      grid-template-areas: "content cta";
+
+      @media all and (max-width: 768px) {
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr min-content;
+        grid-template-areas:
+          "content"
+          "cta";
+      }
+    }
+
+    .icon {
+      grid-area: icon;
+    }
+
+    .cta-container {
+      grid-area: cta;
+    }
+
+    &.size-small {
+      p {
+        font-size: map-get($map: $fontsize, $key: 'small');
+      }
+    }
+
+    p {
+      padding: 0;
+      margin: 0;
+    }
+
+    @each $name, $value in $shades {
+      &.color-#{$name} {
+        border-color: $value;
+        background-color: lighten($value, 30%);
+
+        @if($color_schemas =="dark") {
+          background-color: darken($value, 60%);
+        }
+      }
+    }
+
+    @each $name, $value in $colors {
+      &.color-#{$name} {
+        border-color: $value;
+
+        @if($color_schemas =="dark") {
+          background-color: darken($value, 60%);
+        }
+
+        @else {
+          background-color: lighten($value, 30%);
+        }
+      }
+    }
+
+    @each $name, $value in $brand {
+      &.color-#{$name} {
+        border-color: $value;
+
+        @if($color_schemas =="dark") {
+          background-color: darken($value, 60%);
+        }
+
+        @else {
+          background-color: lighten($value, 30%);
+        }
+      }
+    }
+
+  }
+}
+
+@mixin toast($theme) {
+  $colors: map-get($map: $theme, $key: 'colors');
+  $fontsize: map-get($map: $theme, $key: 'fontsize');
+  $radius: map-get($map: $theme, $key: 'radius');
+  $color_schemas: map-get($map: $theme, $key: "color_schemas");
+
+  &.toast-root {
+    position: fixed;
+    bottom: 40px;
+    left: 40px;
+    z-index: 2;
+
+    display: grid;
+    grid-auto-flow: row;
+    grid-auto-rows: min-content;
+    row-gap: 4px;
+
+    width: 240px;
+
+    :nth-last-child(n+5) {
+      display: none !important;
+    }
+  }
+
+  &.toast-container {
+    display: grid;
+    column-gap: 12px;
+    grid-template-columns: 1fr;
+    grid-template-areas: "content";
+    align-items: center;
+    align-content: center;
+
+    position: relative;
+
+    box-shadow: 0 4px 32px rgba($color: #000000, $alpha: .1);
+    border: 1px solid map-get($map: $colors, $key: 'content');
+    background-color: map-get($map: $colors, $key: 'background_1');
+    border-radius: map-get($map: $radius, $key: 'small');
+
+    p {
+      padding: 0;
+      margin: 0;
+    }
+
+    .toast-title {
+      padding: 8px;
+      padding-bottom: 0px;
+
+      font-size: map-get($map: $fontsize, $key: 'text');
+      font-weight: 600;
+    }
+
+    @each $name, $value in $colors {
+      &.color-#{$name} {
+        background-color: lighten($color: $value, $amount: 25%);
+        border-color: $value;
+
+        color: map-get($map: $colors, $key: "content");
+
+        @if($color_schemas =="dark") {
+          background-color: darken($color: $value, $amount: 55%);
+          color: map-get($map: $colors, $key: "content");
+        }
+      }
+    }
+  }
+
+  &.toast-content {
+    display: grid;
+    column-gap: 12px;
+    grid-template-columns: 1fr;
+    grid-template-areas: "content";
+    align-items: center;
+    align-content: center;
+
+    position: relative;
+
+    padding: 8px;
+
+    &.format-close {
+      grid-template-columns: 1fr 40px;
+      grid-template-areas: "content close";
+    }
+
+    &.format-icon {
+      grid-template-columns: 40px 1fr;
+      grid-template-areas: "icon content";
+    }
+
+    &.format-timer {
+      grid-template-columns: min-content 1fr;
+      grid-template-areas: "timer content";
+    }
+
+    &.format-close-icon {
+      grid-template-columns: 40px 1fr 40px;
+      grid-template-areas: "icon content close";
+    }
+
+    .content {
+      grid-area: content;
+    }
+
+    .close-icon {
+      grid-area: close;
+    }
+
+    .icon {
+      grid-area: icon;
+    }
+
+    .timer {
+      grid-area: timer;
+    }
+
+    .loader {
+      circle {
+        stroke: map-get($colors, 'content');
+      }
+    }
+
+    .text-container {
+      display: grid;
+      grid-auto-flow: row;
+      row-gap: 4px;
+      grid-area: content;
+
+      p {
+        margin: 0;
+        padding: 0;
+      }
+    }
+  }
+}
+
+@mixin toastPulse($theme) {
+  $colors: map-get($map: $theme, $key: 'colors');
+  $radius: map-get($map: $theme, $key: 'radius');
+
+  &.toast-container-pulse {
+    position: fixed;
+    top: 88px;
+    left: 50%;
+    z-index: 3;
+
+    display: grid;
+    grid-auto-flow: row;
+    grid-auto-rows: min-content;
+    justify-content: center;
+
+    width: 320px;
+    border-radius: map-get($map: $radius, $key: 'small');
+    margin: auto;
+    transform: translateX(-50%);
+
+    .toast-message {
+      display: grid;
+      column-gap: 12px;
+      grid-template-columns: 1fr;
+      grid-template-areas: "content";
+      align-items: center;
+
+      position: relative;
+
+      box-shadow: 0 4px 12px rgba($color: #000000, $alpha: .2);
+      border: 2px solid map-get($map: $colors, $key: 'punch');
+      border-radius: map-get($map: $radius, $key: 'medium');
+      padding: 16px;
+
+      &:before,
+      &:after {
+        position: absolute;
+
+        content: '';
+        z-index: -1;
+
+        width: 100%;
+        border-radius: 50%;
+        aspect-ratio: 1/1;
+        transform: scale(0);
+        transform-origin: 50% 50%;
+        background-color: map-get($map: $colors, $key: 'punch');
+        opacity: 0;
+        pointer-events: none;
+
+        animation: pulse infinite ease-out 1.6s;
+      }
+
+      &:after {
+        animation-delay: .6s;
+      }
+
+      @keyframes pulse {
+        0% {
+          opacity: 1;
+          transform: scale(0);
+        }
+
+        100% {
+          opacity: 0;
+          transform: scale(1.5);
+        }
+      }
+
+      &.type-link {
+        cursor: pointer;
+      }
+
+      &.format-close {
+        grid-template-columns: 1fr 40px;
+        grid-template-areas: "content close";
+      }
+
+      &.format-icon {
+        grid-template-columns: 32px 1fr;
+        grid-template-areas: "icon content";
+      }
+
+      &.format-icon-cta {
+        grid-template-columns: 32px 1fr min-content;
+        grid-template-areas: "icon content cta";
+
+        .cta-container {
+          align-self: stretch;
+          gap: 8px;
+
+          margin: -8px;
+
+          a {
+            display: grid;
+            justify-content: center;
+            align-content: center;
+
+            width: 48px;
+            border-radius: map-get($map: $radius, $key: 'medium') - 8px;
+            opacity: .6;
+
+            transition:
+              opacity .3s ease-in-out;
+
+            &:hover {
+              opacity: 1;
+            }
+
+            &:first-child {
+              background-color: map-get($map: $colors, $key: 'positive');
+            }
+
+            &:last-child {
+              background-color: map-get($map: $colors, $key: 'negative');
+            }
+          }
+        }
+      }
+
+      &.format-close-icon {
+        grid-template-columns: 32px 1fr 40px;
+        grid-template-areas: "icon content close";
+      }
+
+      .close-icon {
+        grid-area: close;
+      }
+
+      .icon {
+        grid-area: icon;
+      }
+
+      .text-container {
+        display: grid;
+        grid-auto-flow: row;
+        row-gap: 4px;
+        grid-area: content;
+
+        p {
+          margin: 0;
+          padding: 0;
+        }
+      }
+
+      background: map-get($map: $colors, $key: 'background_2');
+
+      &.level-negative {
+        background: map-get($map: $colors, $key: 'negative');
+      }
+
+      &.level-positive {
+        background: map-get($map: $colors, $key: 'positive');
+      }
+
+      &.level-neutral {
+        background: map-get($map: $colors, $key: 'neutral');
+      }
+
+      &.level-punch {
+        background: map-get($map: $colors, $key: 'punch');
+      }
+    }
+  }
+
+
+}

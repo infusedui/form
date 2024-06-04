@@ -1,0 +1,28 @@
+
+@mixin viewer($theme) {
+  $colors: map-get($map: $theme, $key: 'colors');
+  $radius: map-get($map: $theme, $key: 'radius');
+
+  &.pdf-viewer {
+    position: relative;
+
+    border-radius: map-get($map: $radius, $key: 'small');
+    overflow: hidden;
+
+    .pdf-controls {
+      display: grid;
+      grid-template-columns: 40px 80px 40px;
+      justify-content: center;
+      justify-items: center;
+      align-items: center;
+      align-content: center;
+
+      margin-top: 16px;
+      background: map-get($map: $colors, $key: 'background_1');
+      padding: 8px;
+      border-radius: map-get($map: $radius, $key: 'medium');
+
+      p { margin: 0; padding: 0; }
+    }
+  }
+}

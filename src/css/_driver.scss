@@ -1,0 +1,83 @@
+@mixin global($theme) {
+  $colors: map-get($map: $theme, $key: 'colors');
+  $radius: map-get($map: $theme, $key: 'radius');
+  $fonts: map-get($map: $theme, $key: 'fonts');
+  $fontsize: map-get($map: $theme, $key: 'fontsize');
+
+  &.driver {
+    display: grid !important;
+    grid-auto-flow: row;
+    gap: 8px;
+
+    background: map-get($map: $colors, $key: 'background_1');
+    border-radius: map-get($map: $radius, $key: 'medium');
+
+    font-family: map-get($map: $fonts, $key: 'text') !important;
+
+    .driver-popover-arrow {
+      border: 8px solid map-get($map: $colors, $key: 'background_1');
+
+      &.driver-popover-arrow-side-left {
+        border-right-color: transparent;
+        border-top-color: transparent;
+        border-bottom-color: transparent;
+      }
+
+      &.driver-popover-arrow-side-right {
+        border-left-color: transparent;
+        border-top-color: transparent;
+        border-bottom-color: transparent;
+      }
+
+      &.driver-popover-arrow-side-top {
+        border-left-color: transparent;
+        border-right-color: transparent;
+        border-bottom-color: transparent;
+      }
+
+      &.driver-popover-arrow-side-bottom {
+        border-left-color: transparent;
+        border-top-color: transparent;
+        border-right-color: transparent;
+      }
+    }
+
+    .driver-popover-close-btn {
+      display: none !important;
+    }
+
+    .driver-popover-title {
+      line-height: 1.2em;
+      font-size: map-get($map: $fontsize, $key: 'h4');
+      font-family: map-get($map: $fonts, $key: 'text');
+    }
+
+    .driver-popover-description {
+      font-family: map-get($map: $fonts, $key: 'text');
+      font-size: map-get($map: $fontsize, $key: 'text');
+    }
+
+    .driver-popover-next-btn,
+    .driver-popover-prev-btn {
+      display: grid !important;
+      align-items: center;
+      align-content: center;
+
+      border: none;
+      background-color: darken($color: map-get($colors, "background_2"), $amount: 10%);
+      border-radius: map-get($map: $radius, $key: 'small');
+      height: 32px;
+      padding: 0 16px;
+
+      text-shadow: none;
+      font-family: map-get($map: $fonts, $key: 'text');
+      font-weight: 500;
+      transition:
+        background-color .3s ease-in-out;
+
+      &:hover {
+        background-color: darken($color: map-get($colors, "background_2"), $amount: 20%);
+      }
+    }
+  }
+}

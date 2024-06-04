@@ -1,0 +1,212 @@
+@mixin header($theme) {
+  $colors: map-get($map: $theme, $key: 'colors');
+
+  &.header-nav {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: min-content;
+    align-items: center;
+    align-content: center;
+    gap: 8px;
+
+    &.horizontal-align-middle {
+      justify-content: center;
+    }
+
+    &.horizontal-align-end {
+      justify-content: end;
+    }
+
+    ul {
+      li {
+        list-style: none;
+        padding-left: 4px;
+      }
+
+      display: flex;
+      flex-direction: row;
+
+      list-style: none;
+      height: 100%;
+
+      a {
+        display: grid;
+        grid-auto-flow: column;
+        grid-auto-columns: min-content;
+        gap: 8px;
+        align-items: center;
+        align-content: center;
+
+        position: relative;
+
+        height: 100%;
+        border-radius: 0;
+        background: none;
+        padding: 0 16px;
+
+        transition:
+          color .4s ease-in-out;
+
+        span {
+          white-space: nowrap;
+        }
+
+        &:hover,
+        &:target {
+          outline: none;
+
+          &:before {
+            transform: translateY(-50%);
+            opacity: 1;
+          }
+        }
+
+        &:focus {
+          outline: none;
+        }
+
+        &.hightlight {
+          &:before {
+            background-color: map-get($map: $colors, $key: 'main');
+          }
+
+          &:hover {
+            color: map-get($map: $colors, $key: 'background_1');
+          }
+        }
+
+        &:after {
+          position: absolute;
+          bottom: 8px;
+          left: 50%;
+
+          content: '';
+          pointer-events: none;
+          height: 4px;
+          width: 40px;
+          border-radius: 8px;
+          background: map-get($map: $colors, $key: 'main');
+          opacity: 0;
+          transform:
+            translateX(-50%) translateY(100%);
+          transition:
+            transform .3s ease-in-out,
+            opacity .3s ease-in-out;
+        }
+
+        &.active {
+          &:after {
+            opacity: 1;
+            transform:
+              translateX(-50%) translateY(0%);
+          }
+        }
+
+        &:before {
+          position: absolute;
+          left: 0;
+          right: 0;
+          top: 50%;
+          z-index: -1;
+
+          content: '';
+          height: 40px;
+          background: map-get($map: $colors, $key: 'background_2');
+          transform:
+            translateY(-30%);
+          transform-origin: center center;
+          opacity: 0;
+          border-radius: 40px;
+          pointer-events: none;
+
+          transition:
+            height .2s ease-in-out,
+            transform .2s ease-in-out,
+            opacity .2s ease-in-out;
+        }
+      }
+    }
+  }
+}
+
+@mixin pagination($theme) {
+  $colors: map-get($map: $theme, $key: 'colors');
+  $radius: map-get($map: $theme, $key: 'radius');
+
+  &.pagination {
+    .cta-container {
+      column-gap: 0px !important;
+
+      .cta:first-child {
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+      }
+
+      .cta:last-child {
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+        margin-left: -1px;
+      }
+    }
+
+    height: 56px;
+
+    .pagination-select {
+      min-width: 64px;
+      height: 40px;
+      box-sizing: border-box;
+      border: 1px solid rgba(map-get($colors, "content"), .3);
+      border-radius: 0;
+      background-color: darken($color: map-get($colors, "background_1"), $amount: 5%);
+      margin-left: -1px;
+
+      &:hover {
+        background-color: rgba(map-get($colors, 'content'), $alpha: .2);
+      }
+    }
+  }
+}
+
+@mixin tab($theme) {
+  $colors: map-get($map: $theme, $key: 'colors');
+  $radius: map-get($map: $theme, $key: 'radius');
+
+  &.tab-nav {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: min-content;
+    gap: 2px;
+
+    &.tab-size-full {
+      grid-auto-columns: 1fr;
+    }
+
+    background: map-get($map: $colors, $key: 'background_2');
+    border-radius: map-get($map: $radius, $key: 'small');
+    padding: 2px;
+
+    a {
+      display: grid;
+      justify-content: center;
+      align-items: center;
+
+      padding: 12px 24px;
+      border-radius: map-get($map: $radius, $key: 'small') - 2px;
+
+      color: map-get($map: $colors, $key: 'content');
+
+      transition:
+        background-color .3s ease-in-out,
+        color .3s ease-in-out;
+
+      &:hover {
+        background-color: map-get($map: $colors, $key: 'background_3');
+      }
+
+      &.active {
+        background-color: map-get($map: $colors, $key: 'background_1');
+        color: map-get($map: $colors, $key: 'main');
+      }
+    }
+  }
+}

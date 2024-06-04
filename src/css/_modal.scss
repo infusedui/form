@@ -1,0 +1,132 @@
+@mixin global($theme) {
+  $colors: map-get($map: $theme, $key: 'colors');
+  $radius: map-get($map: $theme, $key: 'radius');
+
+  &.modal {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    z-index: 3;
+
+    .modal-background {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+
+      background: rgba($color: map-get($colors, 'content'), $alpha: .3);
+
+      &.style-grid {
+        backdrop-filter: blur(2px);
+        background-color: rgba($color: #000000, $alpha: .4);
+      }
+    }
+
+    .modal-container {
+      position: relative;
+
+      width: 100vw;
+      max-width: 50vw;
+      max-height: 90vh;
+      margin: 5vh auto;
+      border-radius: map-get($map: $radius, $key: 'large');
+      background-color: map-get($map: $colors, $key: "background_1");
+      box-shadow: 0 8px 40px rgba($color: #000000, $alpha: .1);
+      overflow: hidden;
+
+      &.no-shadow {
+        box-shadow: none;
+      }
+
+      &.format-menu {
+        position: fixed;
+        top: 0;
+        bottom: 0;
+
+        height: 100vh;
+        max-height: 100vh;
+
+        max-width: 30vw;
+        margin: 0;
+        border-radius: 0;
+
+        @media all and (max-width: 768px) {
+          max-width: 80vw;
+        }
+
+        &.position-right {
+          right: 0;
+          border-radius:
+            map-get($map: $radius, $key: 'large') 0 0 map-get($map: $radius, $key: 'large');
+        }
+
+        &.position-left {
+          left: 0;
+          border-radius:
+            0 map-get($map: $radius, $key: 'large') map-get($map: $radius, $key: 'large') 0;
+        }
+      }
+
+      &.size-small {
+        max-width: 480px;
+      }
+
+      &.size-medium {
+        max-width: 640px;
+      }
+
+      &.size-large {
+        max-width: 75vw;
+      }
+
+      &.size-fullscreen {
+        height: 100vh;
+        max-height: 100vh;
+        max-width: 100vw;
+        border-radius: 0;
+        margin: auto;
+      }
+
+      @media all and (max-width: 768px) {
+        max-width: 90vw;
+      }
+
+      .modal-close {
+        position: sticky;
+        top: 16px;
+        left: calc(100% - 16px - 48px);
+        z-index: 3;
+      }
+
+      .modal-body {
+        display: grid;
+        row-gap: 32px;
+
+        padding: 0 16px 16px 16px;
+      }
+
+      .modal-title {
+        padding: 40px;
+        margin-bottom: 0;
+        padding-right: 32px;
+      }
+
+      .modal-header {
+        position: sticky;
+        top: 0;
+
+        z-index: 2;
+
+        min-height: calc(48px + 32px);
+        padding: 16px;
+        padding-right: calc(16px + 48px + 16px);
+        background-color: map-get($map: $colors, $key: "background_1");
+        box-sizing: border-box;
+      }
+    }
+  }
+}

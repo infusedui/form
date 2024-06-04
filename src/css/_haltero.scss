@@ -1,0 +1,110 @@
+@mixin secretary($theme) {
+  $colors: map-get($map: $theme, $key: 'colors');
+  $radius: map-get($map: $theme, $key: 'radius');
+  $fonts: map-get($map: $theme, $key: 'fonts');
+
+  .haltero-secretary {
+    gap: 8px;
+    column-gap: 8px;
+    row-gap: 16px !important;
+
+    padding: 16px;
+    background-color: map-get($map: $colors, $key: 'background_2');
+    border-radius: map-get($map: $radius, $key: "large");
+
+    input {
+      height: 54px;
+      width: 100%;
+      padding: 0 16px;
+      border: 1px solid map-get($map: $colors, $key: 'content');
+      border-radius: map-get($map: $radius, $key: "small");
+      box-sizing: border-box;
+    }
+  }
+
+  .haltero-try {
+    display: grid;
+    grid-template-columns: 1fr min-content;
+    align-content: center;
+    align-items: center;
+  }
+
+  .haltero-title {
+    display: grid;
+    grid-template-columns: 1fr min-content;
+    align-items: center;
+    align-content: center;
+
+    .cta-container {
+      column-gap: 8px;
+    }
+  }
+
+  .haltero-slider {
+    label {
+      display: grid;
+      position: relative;
+
+      width: 100%;
+      height: 54px;
+      border: 2px solid map-get($map: $colors, $key: 'content');
+      background: map-get($map: $colors, $key: 'content');
+      border-radius: map-get($map: $radius, $key: 'small');
+      cursor: pointer;
+    }
+
+    input[type="checkbox"]:not(:checked),
+    input[type="checkbox"]:checked {
+      display: none;
+    }
+
+    input[type="checkbox"]:not(:checked)+label:after,
+    input[type="checkbox"]:checked+label:after {
+      display: flex;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 50%;
+      content: '';
+      background: map-get($map: $colors, $key: 'negative');
+      cursor: pointer;
+      border-radius: map-get($map: $radius, $key: 'small') - 2px;
+      transition: all .3s;
+    }
+
+    input[type="checkbox"]:checked+label:after {
+      left: 50%;
+      right: 0;
+      background: map-get($map: $colors, $key: 'positive');
+    }
+  }
+
+  .big-sync {
+    .form-input {
+      width: 120px;
+      height: 120px;
+      aspect-ratio: 1/1;
+
+      input {
+        font-size: 64px;
+        text-align: center;
+        font-variant-numeric: tabular-nums;
+      }
+    }
+  }
+
+  .haltero-score-big-text {
+    font-size: 72px;
+    font-weight: 900;
+    line-height: 1em;
+
+    @media all and (max-width: 768px) {
+      font-size: 40px;
+    }
+  }
+
+  .haltero-color-main {
+    color: map-get($map: $colors, $key: 'main');
+  }
+}

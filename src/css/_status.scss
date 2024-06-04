@@ -1,0 +1,45 @@
+@mixin line($theme) {
+  $colors: map-get($map: $theme, $key: 'colors');
+  $radius: map-get($map: $theme, $key: 'radius');
+
+  &.status {
+    display: grid;
+    grid-auto-flow: row;
+    grid-auto-rows: min-content;
+    row-gap: 8px;
+
+    background: map-get($map: $colors, $key: 'background_2');
+    border-radius: map-get($map: $radius, $key: 'medium');
+    padding: 16px;
+
+    .status-bar {
+      border-radius: map-get($map: $radius, $key: 'small');
+    }
+  }
+
+  &.status-render {
+    display: grid;
+
+    &.format-line {
+      grid-auto-flow: row;
+      grid-template-columns: repeat(72, 1fr);
+      grid-auto-rows: min-content;
+      gap: 2px;
+    }
+  }
+
+  &.status-bar {
+    display: grid;
+
+    width: 100%;
+    aspect-ratio: 1/1;
+
+    &.state-positive {
+      background-color: map-get($map: $colors, $key: 'positive');
+    }
+
+    &.state-negative {
+      background-color: map-get($map: $colors, $key: 'negative');
+    }
+  }
+}

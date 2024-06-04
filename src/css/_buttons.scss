@@ -1,0 +1,384 @@
+@mixin container($theme) {
+  $radius: map-get($map: $theme, $key: "radius");
+
+  &.cta-container {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: min-content;
+    column-gap: 16px;
+    row-gap: 16px;
+
+    // Gap size
+    $k: 8;
+
+    @while $k <=64 {
+      @media all and (min-width: 768px) {
+        &.column-gap-size-#{$k} {
+          column-gap: 1px * $k;
+        }
+
+        &.row-gap-size-#{$k} {
+          row-gap: 1px * $k;
+        }
+      }
+
+      @media all and (max-width: 768px) {
+        &.xs-column-gap-size-#{$k} {
+          column-gap: 1px * $k;
+        }
+
+        &.xs-row-gap-size-#{$k} {
+          row-gap: 1px * $k;
+        }
+      }
+
+      $k: $k + 8;
+    }
+
+    &.horizontal-align-start {
+      justify-content: start;
+      justify-items: start;
+    }
+
+    &.horizontal-align-center {
+      justify-content: center;
+      justify-items: center;
+    }
+
+    &.horizontal-align-end {
+      justify-content: end;
+      justify-items: end;
+    }
+
+    &.format-row {
+      grid-auto-flow: row;
+      grid-auto-rows: min-content;
+      grid-template-columns: 1fr;
+
+      .cta {
+        width: auto;
+      }
+    }
+
+    &.format-col {
+      grid-template-columns: 1fr;
+      grid-auto-flow: column;
+      grid-auto-columns: min-content;
+
+      .cta:first-child {
+        width: auto;
+      }
+    }
+
+    &.format-button-group {
+      column-gap: 0;
+
+      .cta {
+        border-radius: 0;
+        margin-left: -1px;
+
+        &:first-child {
+          border-top-left-radius: map-get($map: $radius, $key: "small");
+          border-bottom-left-radius: map-get($map: $radius, $key: "small");
+          margin-left: 0;
+        }
+
+        &:last-child {
+          border-top-right-radius: map-get($map: $radius, $key: "small");
+          border-bottom-right-radius: map-get($map: $radius, $key: "small");
+        }
+      }
+    }
+  }
+}
+
+@mixin cta($theme) {
+  $colors: map-get($theme, 'colors');
+  $fonts: map-get($theme, 'fonts');
+  $fontsize: map-get($theme, 'fontsize');
+  $schemas: map-get($theme, 'color_schemas');
+  $radius_schemas: map-get($map: $theme, $key: 'radius_schemas');
+  $color_schemas: map-get($map: $theme, $key: 'color_schemas');
+  $radius: map-get($theme, 'radius');
+
+  &.cta {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: min-content;
+    grid-template-areas:
+      "content";
+    align-items: center;
+    justify-items: center;
+    align-content: center;
+    justify-content: center;
+    gap: 12px;
+
+    position: relative;
+
+    width: fit-content;
+    height: 40px;
+    padding: 0 16px;
+    border-radius: map-get($map: $radius, $key: 'small');
+    border: 1px solid transparent;
+    box-sizing: border-box;
+    overflow: hidden;
+    outline: 0 solid rgba(map-get($colors, 'main'), $alpha: .4);
+    outline-offset: 2px;
+
+    cursor: pointer;
+
+    color: map-get($map: $colors, $key: 'content');
+    text-decoration: none;
+    white-space: nowrap;
+    font-size: map-get($map: $fontsize, $key: 'text');
+    transition:
+      outline-width .1s ease-in-out,
+      background-color .3s ease-in-out,
+      color .3s ease-in-out;
+
+    &:disabled,
+    &.state-disabled {
+      opacity: .6;
+      cursor: not-allowed;
+    }
+
+    &:focus,
+    &:target {
+      outline-width: 4px;
+    }
+
+    span:not(.tag) {
+      grid-area: content;
+      white-space: nowrap;
+    }
+
+    i.dtc-icon,
+    span.loader,
+    .icon {
+      grid-area: icon;
+    }
+
+    span,
+    i {
+      position: relative;
+      z-index: 1;
+    }
+
+    &.shadow {
+      box-shadow: 0 8px 12px rgba($color: #000000, $alpha: .2);
+    }
+
+    &.size-small {
+      gap: 8px;
+
+      height: 32px;
+      padding: 0 12px;
+      border-radius: map-get($map: $radius, $key: 'small');
+
+      font-size: map-get($map: $fontsize, $key: 'small');
+      font-weight: 400;
+    }
+
+    &.size-large {
+      gap: 16px;
+
+      height: 48px;
+      padding: 0 24px;
+      border-radius: map-get($map: $radius, $key: 'small');
+    }
+
+    // Format
+    &.format-icon-only {
+      grid-template-columns: 24px;
+      grid-template-areas:
+        "icon";
+      padding: 0;
+      width: 40px;
+
+      &.size-small {
+        width: 32px;
+      }
+
+      &.size-large {
+        width: 48px;
+      }
+    }
+
+    &.format-icon-left {
+      grid-template-columns: 24px min-content;
+      grid-template-areas:
+        "icon content";
+      padding-left: 8px;
+
+      @if($radius_schemas =="circle") {
+        padding-left: 12px;
+      }
+
+      &.size-small {
+        padding-left: 4px;
+
+        @if($radius_schemas =="circle") {
+          padding-left: 8px;
+        }
+      }
+
+      &.size-large {
+        padding-left: 12px;
+
+        @if($radius_schemas =="circle") {
+          padding-left: 16px;
+        }
+      }
+    }
+
+    &.format-icon-right {
+      grid-template-columns: min-content 24px;
+      grid-template-areas:
+        "content icon";
+      padding-right: 8px;
+
+      @if($radius_schemas =="circle") {
+        padding-right: 12px;
+      }
+
+      &.size-small {
+        padding-right: 4px;
+
+        @if($radius_schemas =="circle") {
+          padding-right: 8px;
+        }
+      }
+
+      &.size-large {
+        padding-right: 12px;
+
+        @if($radius_schemas =="circle") {
+          padding-right: 16px;
+        }
+      }
+    }
+
+    // Level
+    &.level-primary {
+      background-color: map-get($map: $colors, $key: 'main');
+
+      @if($schemas =='default') {
+        color: map-get($map: $colors, $key: 'background_1');
+      }
+
+      @if($schemas =='dark') {
+        color: map-get($map: $colors, $key: 'content');
+      }
+
+      &:hover,
+      &:focus,
+      &:target {
+        background-color: lighten(map-get($colors, 'main'), 10%);
+      }
+
+      // making all colors variants
+      @each $name, $value in $colors {
+        &.color-#{$name} {
+          border-color: rgba(map-get($colors, "content"), .3);
+          background-color: lighten($color: $value, $amount: 5%);
+          color: map-get($map: $colors, $key: "content");
+
+          @if($color_schemas =="dark") {
+            background-color: $value;
+            color: map-get($map: $colors, $key: "content");
+          }
+
+          &:hover,
+          &:focus,
+          &:target {
+            background-color: rgba($value, .3);
+            color: map-get($map: $colors, $key: "content");
+
+            @if($color_schemas =="dark") {
+              background-color: darken($color: $value, $amount: 35%);
+            }
+          }
+        }
+      }
+
+      .loader svg circle {
+        stroke: map-get($map: $colors, $key: 'content');
+
+        @if($schemas =='default') {
+          stroke: map-get($map: $colors, $key: 'background_1');
+        }
+      }
+    }
+
+    &.level-secondary {
+      background-color: map-get($map: $colors, $key: 'content');
+
+      color: map-get($map: $colors, $key: 'background_1');
+
+      &:hover,
+      &:focus,
+      &:target {
+        background-color: lighten(map-get($colors, 'content'), 20%);
+      }
+    }
+
+    &.level-tertiary {
+      background-color: darken($color: map-get($colors, "background_1"), $amount: 5%);
+      border-color: rgba(map-get($colors, "content"), .3);
+
+      &:hover,
+      &:focus,
+      &:target {
+        background-color: rgba(map-get($colors, 'content'), $alpha: .2);
+      }
+
+      // making all colors variants
+      @each $name, $value in $colors {
+        &.color-#{$name} {
+          background-color: lighten($color: $value, $amount: 5%);
+          color: map-get($map: $colors, $key: "content");
+
+          @if($color_schemas =="dark") {
+            background-color: darken($color: $value, $amount: 55%);
+            color: $value;
+          }
+
+          &:hover,
+          &:focus,
+          &:target {
+            background-color: rgba($value, .3);
+            color: map-get($map: $colors, $key: "content");
+
+            @if($color_schemas =="dark") {
+              background-color: darken($color: $value, $amount: 35%);
+            }
+          }
+        }
+      }
+    }
+
+    &.level-negative {
+      background-color: map-get($colors, 'negative');
+
+      .loader svg circle {
+        stroke: map-get($map: $colors, $key: 'content');
+      }
+
+      &:hover,
+      &:focus,
+      &:target {
+        background-color: lighten(map-get($colors, 'negative'), 10%);
+      }
+    }
+
+    &.level-positive {
+      background-color: map-get($colors, 'positive');
+
+      &:hover,
+      &:focus,
+      &:target {
+        background-color: lighten(map-get($colors, 'positive'), 10%);
+      }
+    }
+  }
+}

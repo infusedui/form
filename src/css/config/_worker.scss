@@ -1,0 +1,121 @@
+@use '../global';
+@use '../text';
+@use '../buttons';
+@use '../grid';
+@use '../marge';
+@use '../animation';
+@use '../message';
+@use '../form';
+@use '../code';
+@use '../header';
+@use '../card';
+@use '../modal';
+@use '../nav';
+@use '../aside';
+@use '../pdf';
+@use '../footer';
+@use '../video';
+@use '../status';
+@use '../table';
+@use "../driver";
+@use "../list";
+@use "../media";
+@use "../timeline";
+
+@mixin worker($theme) {
+  @include global.icon($theme);
+  @include global.default($theme);
+  @include global.svg($theme);
+
+  @include text.global($theme);
+  @include text.title($theme);
+  @include text.link($theme);
+  @include text.blockquote($theme);
+
+  .teaui {
+    @include global.schemas($theme);
+    @include global.loader($theme);
+    @include global.tag($theme);
+    @include global.switch($theme);
+    @include global.shadow($theme);
+    @include global.flag($theme);
+    @include global.link($theme);
+
+    @include grid.base($theme);
+    @include grid.border($theme);
+    @include grid.col($theme);
+    @include grid.row($theme);
+
+    @include status.line($theme);
+
+    @include timeline.global($theme);
+
+    @include header.global($theme);
+    @include header.company($theme);
+
+    @include aside.global($theme);
+
+    @include nav.header($theme);
+    @include nav.tab($theme);
+    @include nav.pagination($theme);
+
+    @include text.adjust($theme);
+    @include text.special($theme);
+
+    @include buttons.cta($theme);
+    @include buttons.container($theme);
+
+    @include animation.global($theme);
+    @include animation.error($theme);
+    @include animation.underlined($theme);
+    @include animation.bounce($theme);
+    @include animation.fadeIn($theme);
+    @include animation.fadeOut($theme);
+
+    @include message.global($theme);
+    @include message.toast($theme);
+    @include message.toastPulse($theme);
+    @include message.alert($theme);
+
+    @include form.global($theme);
+    @include form.container($theme);
+    @include form.group($theme);
+    @include form.password($theme);
+    @include form.input($theme);
+    @include form.radio($theme);
+    @include form.radio-line($theme);
+    @include form.checkbox($theme);
+    @include form.checkbox-line($theme);
+    @include form.dragAndDrop($theme);
+    @include form.autocomplete($theme);
+    @include form.datepicker($theme);
+    @include form.fileInput($theme);
+
+    @include media.images($theme);
+
+    @include list.point($theme);
+
+    @include pdf.viewer($theme);
+
+    @include driver.global($theme);
+
+    @include code.code($theme);
+    @include code.pretty($theme);
+
+    @include card.card($theme);
+    @include card.container($theme);
+
+    @include modal.global($theme);
+
+    @include video.player($theme);
+
+    @include footer.global($theme);
+
+    @include table.global($theme);
+    @include table.gridtable($theme);
+
+    // At end only
+    @include marge.margin($theme);
+    @include marge.padding($theme);
+  }
+}

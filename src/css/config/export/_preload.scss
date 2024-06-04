@@ -1,0 +1,59 @@
+// Import all themes
+@import '../themes';
+
+// Import css worker
+@import '../worker';
+
+// Import reset all base css
+@import '../reset';
+
+// Import base external import
+@import '../import';
+
+
+// Include worker and theme
+@include worker($theme__default);
+
+// Details all theme with class
+// .light { @include worker($theme__themeName); }
+
+.teaui-schema {
+
+  // Light
+  &.theme-dtc {
+    @include worker($theme__dtc);
+  }
+
+  &.theme-pooks {
+    @include worker($theme__pooks);
+  }
+
+  &.theme-haltero {
+    @include worker($theme__haltero);
+  }
+
+  &.theme-red {
+    @include worker($theme__red);
+  }
+
+  // Dark
+  &.theme-default-dark {
+    @include worker($theme__default_dark);
+  }
+
+  &.theme-pooks-dark {
+    @include worker($theme__pooks_dark);
+  }
+
+  &.theme-dtc-dark {
+    @include worker($theme__dtc_dark);
+  }
+
+  &.theme-haltero-dark {
+    @include worker($theme__haltero_dark);
+  }
+
+  &.theme-red-dark {
+    @include worker($theme__red_dark);
+  }
+}

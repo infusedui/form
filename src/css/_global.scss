@@ -1,0 +1,660 @@
+@mixin icon($theme) {
+  $colors: map-get($map: $theme, $key: 'colors');
+  $shades: map-get($map: $theme, $key: 'shades');
+  $brand: map-get($map: $theme, $key: 'brand');
+
+  .icon {
+    display: inline-grid;
+    grid-template-columns: 24px;
+    grid-template-rows: 24px;
+    align-items: center;
+    justify-content: center;
+
+    color: inherit;
+    font-size: 24px;
+    text-transform: none;
+    font-style: normal;
+
+    @each $name, $value in $colors {
+      &.color-#{$name} {
+        color: $value;
+      }
+    }
+
+    @each $name, $value in $brand {
+      &.color-#{$name} {
+        color: $value;
+      }
+    }
+
+    @each $name, $value in $shades {
+      &.color-#{$name} {
+        color: $value;
+      }
+    }
+
+    &.size-small {
+      grid-template-columns: 16px;
+      grid-template-rows: 16px;
+
+      font-size: 16px;
+    }
+
+    &.size-large {
+      grid-template-columns: 32px;
+      grid-template-rows: 32px;
+
+      font-size: 32px;
+    }
+
+    &.size-extralarge {
+      grid-template-columns: 64px;
+      grid-template-rows: 64px;
+
+      font-size: 64px;
+    }
+  }
+}
+
+@mixin switch($color_schemas) {
+  $colors: map-get($color_schemas, 'colors');
+  $radius: map-get($color_schemas, 'radius');
+
+  &.theme-switch {
+    label {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      align-items: center;
+      justify-items: center;
+
+      position: relative;
+
+      width: 72px;
+      height: 40px;
+      border-radius: 40px;
+      background: map-get($map: $colors, $key: 'content');
+
+      color: map-get($map: $colors, $key: 'background_1');
+      cursor: pointer;
+
+      transition: border-color .1s ease-in-out, left .1s ease-in-out;
+    }
+
+    label:after {
+      display: grid;
+
+      position: absolute;
+      top: 50%;
+      left: 2px;
+
+      content: '';
+      height: calc(100% - 4px);
+      aspect-ratio: 1/1;
+      border-radius: 50%;
+      background-color: map-get($map: $colors, $key: 'background_1');
+      transform: translateY(-50%) translateX(calc(100% - 4px));
+    }
+
+    input[type="checkbox"] {
+
+      &:not(:checked),
+      &:checked {
+        display: none;
+      }
+
+      &:checked {
+        +label:after {
+          transform: translateY(-50%) translateX(0%);
+        }
+      }
+    }
+  }
+}
+
+@mixin svg($theme) {
+  $colors: map-get($map: $theme, $key: 'colors');
+
+  svg {
+    [fill="content"] {
+      fill: map-get($map: $colors, $key: 'content');
+    }
+
+    [fill="main"] {
+      fill: map-get($map: $colors, $key: 'main');
+    }
+
+    [fill="bg1"] {
+      fill: map-get($map: $colors, $key: 'background_1');
+    }
+
+    [fill="bg2"] {
+      fill: map-get($map: $colors, $key: 'background_2');
+    }
+
+    [fill="bg3"] {
+      fill: map-get($map: $colors, $key: 'background_3');
+    }
+  }
+}
+
+@mixin loader($theme) {
+  $colors: map-get($theme, 'colors');
+  $schemas: map-get($theme, 'schemas');
+
+  &.loader {
+    width: 24px;
+    height: 24px;
+
+    &.size-giant {
+      width: 64px;
+      height: 64px;
+
+      svg {
+        width: 64px;
+        height: 64px;
+      }
+
+      circle {
+        stroke-width: 2;
+      }
+    }
+
+    &.size-medium {
+      width: 48px;
+      height: 48px;
+
+      svg {
+        width: 48px;
+        height: 48px;
+      }
+
+      circle {
+        stroke-width: 3;
+      }
+    }
+
+    svg {
+      width: 24px;
+      height: 24px;
+      transform-origin: center;
+      animation: rotate4 2s linear infinite;
+    }
+
+    circle {
+      fill: none;
+      stroke: map-get($colors, 'main');
+      stroke-width: 5;
+      stroke-dasharray: 1, 200;
+      stroke-dashoffset: 0;
+      stroke-linecap: round;
+      animation: dash4 1.5s ease-in-out infinite;
+    }
+
+    @keyframes rotate4 {
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+    @keyframes dash4 {
+      0% {
+        stroke-dasharray: 1, 200;
+        stroke-dashoffset: 0;
+      }
+
+      50% {
+        stroke-dasharray: 90, 200;
+        stroke-dashoffset: -35px;
+      }
+
+      100% {
+        stroke-dashoffset: -125px;
+      }
+    }
+  }
+
+  &.dtc-loader {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    align-items: center;
+    column-gap: 4px;
+
+    padding: 10px;
+    width: 80px;
+    height: 80px;
+    border-radius: 12px;
+    background: map-get($map: $colors, $key: 'background_2');
+
+    &.little {
+      column-gap: 3px;
+      padding: 6px;
+      width: 32px;
+      height: 32px;
+      border-radius: 12px;
+
+      span {
+        height: 14px;
+        border-radius: 9px;
+      }
+    }
+
+    &.mini {
+      column-gap: 2px;
+      padding: 3px;
+      width: 18px;
+      height: 18px;
+      border-radius: 8px;
+
+      span {
+        height: 8px;
+        border-radius: 14px;
+      }
+    }
+
+    span {
+      position: relative;
+
+      height: 24px;
+      border-radius: 18px;
+      background: map-get($map: $colors, $key: 'main');
+
+      &:first-child {
+        animation: .6s loaderBounce ease-in-out infinite;
+      }
+
+      &:nth-child(2) {
+        animation: .6s loaderBounce .1s ease-in-out infinite;
+      }
+
+      &:last-child {
+        animation: .6s loaderBounce .2s ease-in-out infinite;
+      }
+    }
+
+    @keyframes loaderBounce {
+      0% {
+        transform: translateY(0%);
+      }
+
+      20% {
+        transform: translateY(0%);
+      }
+
+      40% {
+        transform: translateY(20%);
+      }
+
+      60% {
+        transform: translateY(-20%);
+      }
+
+      80% {
+        transform: translateY(0%);
+      }
+
+      100% {
+        transform: translateY(0%);
+      }
+    }
+  }
+}
+
+@mixin default($theme) {
+  $fonts: map-get($theme, 'fonts');
+  $colors: map-get($map: $theme, $key: 'colors');
+  $radius: map-get($map: $theme, $key: 'radius');
+  $schemas: map-get($map: $theme, $key: 'color_schemas');
+
+  .highlighted {
+    background: map-get($map: $colors, $key: 'content');
+    color: map-get($map: $colors, $key: 'background_1');
+  }
+
+  @media all and (min-width: 992px) {
+    .ls-invisible {
+      display: none !important;
+    }
+  }
+
+  @media all and (min-width: 768px) and (max-width: 992px) {
+    .ms-invisible {
+      display: none !important;
+    }
+  }
+
+  @media all and (max-width: 768px) {
+    .xs-invisible {
+      display: none !important;
+    }
+  }
+
+  .position-sticky {
+    position: sticky;
+    z-index: 2;
+
+    $a: 0;
+
+    @while $a <=20 {
+      &.top-#{$a * 8} {
+        top: $a * 8px;
+      }
+
+      &.bottom-#{$a * 8} {
+        bottom: $a * 8px;
+      }
+
+      &.left-#{$a * 8} {
+        left: $a * 8px;
+      }
+
+      &.right-#{$a * 8} {
+        right: $a * 8px;
+      }
+
+      $a: $a + 1;
+    }
+  }
+
+  .position-fixed {
+    position: fixed;
+    z-index: 4;
+
+    $a: 0;
+
+    @while $a <=20 {
+      &.top-#{$a * 8} {
+        top: $a * 8px;
+      }
+
+      &.bottom-#{$a * 8} {
+        bottom: $a * 8px;
+      }
+
+      &.left-#{$a * 8} {
+        left: $a * 8px;
+      }
+
+      &.right-#{$a * 8} {
+        right: $a * 8px;
+      }
+
+      $a: $a + 1;
+    }
+  }
+
+  body {
+    font-family: map-get($map: $fonts, $key: 'text');
+
+    * {
+      position: relative;
+
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+
+      font-family: map-get($map: $fonts, $key: 'text');
+    }
+  }
+
+  .simplebar-scrollbar {
+
+    &.simplebar-visible:before,
+    &:before {
+      background-color: rgba($color: map-get($map: $colors, $key: 'content'), $alpha: .5);
+    }
+  }
+}
+
+@mixin schemas($theme) {
+  $colors: map-get($map: $theme, $key: 'colors');
+
+  &.body {
+    background: map-get($map: $colors, $key: 'background_1');
+    min-height: 100vh;
+    min-width: 100vw;
+    overflow-y: hidden;
+
+    color: map-get($map: $colors, $key: 'content');
+  }
+}
+
+@mixin tag($theme) {
+  $radius: map-get($map: $theme, $key: 'radius');
+  $colors: map-get($map: $theme, $key: 'colors');
+  $shades: map-get($map: $theme, $key: 'shades');
+  $color_schemas: map-get($map: $theme, $key: 'color_schemas');
+  $fontsize: map-get($map: $theme, $key: 'fontsize');
+
+  &.tag-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+
+  &.tag {
+    display: inline-flex;
+    align-items: center;
+    align-content: center;
+
+    height: fit-content;
+    border-radius: 24px;
+    border: 1px solid transparent;
+    padding-left: 8px;
+    padding-right: 8px;
+    width: fit-content;
+    height: 24px;
+
+    font-size: .8em;
+    font-weight: 600;
+    white-space: nowrap;
+
+    .circle {
+      width: 24px;
+      height: 24px;
+      border: 2px solid transparent;
+      border-radius: 50%;
+    }
+
+    &.size-small {
+      border-radius: map-get($map: $radius, $key: 'large');
+    }
+
+    &.size-large {
+      border-radius: map-get($map: $radius, $key: 'medium');
+
+      font-size: map-get($map: $fontsize, $key: 'text');
+    }
+
+    &.format-icon {
+      display: inline-grid;
+      align-items: center;
+      grid-template-columns: 24px min-content;
+      column-gap: 8px;
+
+      padding-left: 4px;
+
+      span {
+        white-space: nowrap;
+      }
+    }
+
+    &.format-badge {
+      padding: 4px 8px;
+      height: 24px;
+      border-radius: map-get($map: $radius, $key: 'large');
+
+      &.position {
+        position: absolute;
+
+        &.top-left {
+          top: 4px;
+          left: 4px;
+        }
+
+        &.top-right {
+          top: 4px;
+          right: 4px;
+        }
+
+        &.bottom-left {
+          bottom: 4px;
+          left: 4px;
+        }
+
+        &.bottom-right {
+          bottom: 4px;
+          right: 4px;
+        }
+      }
+    }
+
+    &.format-pastille {
+      padding: 0;
+      height: 12px;
+      aspect-ratio: 1/1;
+      border-radius: 50%;
+
+      &.position {
+        position: absolute;
+
+        &.top-left {
+          top: 8px;
+          left: 8px;
+        }
+
+        &.top-right {
+          top: 8px;
+          right: 8px;
+        }
+
+        &.bottom-left {
+          bottom: 8px;
+          left: 8px;
+        }
+
+        &.bottom-right {
+          bottom: 8px;
+          right: 8px;
+        }
+      }
+    }
+
+    color: map-get($map: $colors, $key: 'background_1');
+
+    &.fill {
+      @each $name, $value in $shades {
+        &.color-#{$name} {
+          background-color: $value;
+          color: darken($value, 80%);
+        }
+      }
+
+      @each $name, $value in $colors {
+        &.color-#{$name} {
+          background-color: $value;
+          color: darken($value, 80%);
+        }
+      }
+    }
+
+    &.stroke {
+      .circle {
+        &.draft {
+          border-style: dashed;
+          border-color: map-get($map: $colors, $key: 'content');
+        }
+      }
+
+      @each $name, $value in $shades {
+        &.color-#{$name} {
+          border-color: $value;
+          background-color: lighten($value, $amount: 40%);
+
+          @if($color_schemas =="dark") {
+            background-color: darken($value, 50%);
+          }
+
+          color: $value;
+
+          .circle:not(.draft) {
+            background-color: $value;
+          }
+        }
+      }
+
+      @each $name, $value in $colors {
+        &.color-#{$name} {
+          border-color: $value;
+          background-color: lighten($value, $amount: 50%);
+
+          @if($color_schemas =="dark") {
+            background-color: darken($value, 50%);
+          }
+
+          color: $value;
+
+          .circle:not(.draft) {
+            background-color: $value;
+          }
+        }
+      }
+    }
+  }
+}
+
+@mixin shadow($theme) {
+
+  &.shadow-browser {
+    box-shadow: 0 0 128px 64px rgba($color: #000000, $alpha: 5%);
+  }
+}
+
+@mixin flag($theme) {
+
+  &.flag {
+    height: 6px;
+    max-height: 6px;
+
+    &.french {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+
+      width: 24px;
+      min-height: 120px;
+
+      div:first-child {
+        background: linear-gradient(to bottom, #000091, transparent);
+      }
+
+      div:nth-child(2) {
+        background: linear-gradient(to bottom, #ffffff, transparent);
+      }
+
+      div:nth-child(3) {
+        background: linear-gradient(to bottom, #e1000f, transparent);
+      }
+    }
+  }
+}
+
+@mixin link($theme) {
+  $colors: map-get($theme, 'colors');
+  $shades: map-get($theme, 'shades');
+
+  a {
+    transition:
+      color .3s;
+
+    // making all colors variants
+    @each $name, $value in $colors {
+      &.hover-color-#{$name}:hover {
+        color: $value;
+      }
+    }
+
+    @each $name, $value in $shades {
+      &.hover-color-#{$name}:hover {
+        color: $value;
+      }
+    }
+  }
+}

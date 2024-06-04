@@ -1,0 +1,405 @@
+@use "sass:math";
+
+@mixin global($theme) {
+  $colors: map-get($theme, 'colors');
+  $fonts: map-get($theme, 'fonts');
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  label,
+  p,
+  span,
+  blockquote,
+  code,
+  ul,
+  li,
+  textarea,
+  input,
+  select,
+  a,
+  button {
+    color: inherit;
+    text-decoration: none;
+    font-family: map-get($fonts, 'text');
+  }
+
+  p,
+  blockquote,
+  ul,
+  li {
+    line-height: 1.5em;
+  }
+
+  p {
+    margin-bottom: 16px;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+  }
+
+  [contenteditable],
+  article {
+    div {
+      @extend p;
+    }
+  }
+
+  ul li {
+    list-style: circle;
+    line-height: 1.25em;
+  }
+
+  ol li {
+    list-style-type: decimal-leading;
+  }
+
+  ul,
+  ol {
+    padding-left: 32px;
+  }
+
+  u {
+    text-decoration: underline;
+  }
+
+  em,
+  i {
+    font-style: italic;
+  }
+
+  strong,
+  b,
+  .bold {
+    font-weight: 700;
+  }
+
+  p code {
+    font-family: 'Courier New', Courier, monospace;
+    background: map-get($map: $colors, $key: 'main');
+    padding: 2px 4px;
+    border-radius: 4px;
+  }
+}
+
+@mixin title($theme) {
+  $fonts: map-get($theme, 'fonts');
+  $fontsize: map-get($theme, 'fontsize');
+
+  div.title-container {
+    display: grid;
+    grid-template-columns: 1fr min-content;
+    grid-auto-flow: column;
+    grid-auto-columns: min-content;
+    align-items: center;
+
+    margin-bottom: 16px;
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      margin: 0;
+      padding: 0;
+    }
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    line-height: 1.2em;
+    font-family: map-get($fonts, 'title');
+
+    span {
+      font-family: inherit;
+    }
+  }
+
+  h5,
+  h6 {
+    line-height: 1.2em;
+    font-family: map-get($fonts, 'text');
+  }
+
+  h1 {
+    padding-bottom: 16px;
+
+    font-size: map-get($fontsize, 'h1');
+    font-weight: 300;
+  }
+
+  h2 {
+    padding-top: 44px;
+    padding-bottom: 16px;
+
+    font-size: map-get($fontsize, 'h2');
+    font-weight: 500;
+  }
+
+  h3 {
+    padding-top: 38px;
+    padding-bottom: 16px;
+
+    font-size: map-get($fontsize, 'h3');
+    font-weight: 500;
+  }
+
+  h4 {
+    padding-top: 32px;
+    padding-bottom: 16px;
+
+    font-size: map-get($fontsize, 'h4');
+    font-weight: 500;
+  }
+
+  h5 {
+    padding-top: 24px;
+    padding-bottom: 12px;
+
+    font-size: map-get($fontsize, 'h5');
+    font-weight: 500;
+  }
+
+  h6 {
+    padding-top: 16px;
+    padding-bottom: 8px;
+
+    font-size: map-get($fontsize, 'h6');
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    &:is(:first-child) {
+      margin-top: 0;
+      padding-top: 0;
+    }
+  }
+}
+
+@mixin link($theme) {
+  $colors: map-get($theme, 'colors');
+  $fonts: map-get($theme, 'fonts');
+
+  p,
+  ul,
+  li,
+  blockquote,
+  article div {
+    a {
+      background:
+        linear-gradient(to top, map-get($colors, 'main') 0%,
+          map-get($colors, 'main') 10%,
+          transparent 10.01%) no-repeat bottom left;
+      background-size: 100% 100%;
+      outline-color:
+        rgba($color: map-get($colors, 'main'), $alpha: .3);
+      outline-style: solid;
+      outline-width: 0;
+
+      color: inherit;
+      text-decoration: none;
+      font-weight: 500;
+      transition:
+        background-size .3s,
+        outline-width .1s ease-in-out;
+
+      &:hover {
+        animation: underlined .8s both;
+      }
+
+      &:focus,
+      &:target {
+        outline-width: 4px;
+        border-color: map-get($colors, 'background_1');
+        border-radius: 4px;
+      }
+    }
+
+    a.no-underlined {
+      background-size: 0 100%;
+    }
+
+    a.no-underlined:hover {
+      background-size: 100% 100%;
+      transition: background-size .3s;
+      animation: none;
+    }
+
+    b {
+      font-weight: 600;
+    }
+
+    em {
+      font-style: italic;
+    }
+
+    u {
+      text-decoration: underline;
+    }
+
+    &.small {
+      font-size: 12px;
+    }
+
+    font-family: map-get($fonts, 'text');
+  }
+}
+
+@mixin blockquote($theme) {
+  $colors: map-get($theme, 'colors');
+  $fonts: map-get($theme, 'fonts');
+  $radius: map-get($theme, 'radius');
+
+  blockquote {
+    padding: 8px 16px;
+    margin-bottom: 24px;
+    margin-top: 24px;
+    border-left: 4px solid map-get($map: $colors, $key: 'main');
+
+    p:first-child {
+      margin-top: 0
+    }
+
+    p:last-child {
+      margin-bottom: 0
+    }
+  }
+}
+
+@mixin adjust($theme) {
+  $colors: map-get($map: $theme, $key: "colors");
+  $schemas: map-get($map: $theme, $key: "color_schemas");
+
+  &.text {
+    &.vertical-align-start {
+      align-items: start;
+    }
+
+    &.vertical-align-center {
+      align-items: center;
+    }
+
+    &.vertical-align-end {
+      align-items: end;
+    }
+
+    &.horizontal-align-start {
+      justify-items: start;
+    }
+
+    &.horizontal-align-center {
+      justify-items: center;
+    }
+
+    &.horizontal-align-end {
+      justify-items: end;
+    }
+
+    &.formated {
+      font-feature-settings: "tnum" 1, "dgsp";
+    }
+  }
+
+  &.text-settings {
+
+    &.font-size-small {
+      font-size: .8em;
+      opacity: .8;
+    }
+
+    &.labeled {
+      opacity: .6;
+    }
+
+    $i: 0;
+
+    @while $i <=20 {
+      @media all and (min-width: 768px) {
+        &.font-size-#{$i * 8} {
+          font-size: 8px * $i;
+        }
+      }
+
+      @media all and (max-width: 768px) {
+        &.font-size-xs-#{$i * 8} {
+          font-size: 8px * $i;
+        }
+      }
+
+      $i: $i + 1;
+    }
+
+    $j: 0;
+
+    @while $j <=900 {
+      @media all and (min-width: 768px) {
+        &.font-weight-#{$j} {
+          font-weight: $j;
+        }
+      }
+
+      @media all and (max-width: 768px) {
+        &.font-weight-xs-#{$j} {
+          font-weight: $j;
+        }
+      }
+
+      $j: $j + 100;
+    }
+
+    &.align-center {
+      text-align: center;
+    }
+
+    &.align-right {
+      text-align: right;
+    }
+
+    &.format-number {
+      font-variant-numeric: tabular-nums;
+    }
+
+    @if($schemas =="default") {
+      &.color-inverted {
+        color: map-get($map: $colors, $key: 'background_1');
+      }
+    }
+
+    @if($schemas =="dark") {
+      &.dark-color-inverted {
+        color: map-get($map: $colors, $key: 'background_1');
+      }
+    }
+
+    &.color-main {
+      color: map-get($map: $colors, $key: 'main');
+    }
+
+    &.filter-difference {
+      mix-blend-mode: difference;
+    }
+  }
+}
+
+@mixin special($theme) {
+  $fonts: map-get($map: $theme, $key: 'fonts');
+
+  &.company-title {
+    font-family: map-get($map: $fonts, $key: 'company');
+    font-size: 96px;
+    font-weight: 900;
+
+    * {
+      font-family: inherit;
+    }
+  }
+}

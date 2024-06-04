@@ -1,0 +1,44 @@
+@mixin point($theme) {
+  $colors: map-get($map: $theme, $key: 'colors');
+
+  &:is(ul).point-list {
+    list-style: none;
+
+
+    li {
+      position: relative;
+
+      list-style: none;
+      padding-bottom: 8px;
+
+      &:before {
+        position: absolute;
+        top: 8px;
+        left: -32px;
+
+        content: "";
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: map-get($map: $colors, $key: "background_3");
+      }
+
+      &:after {
+        position: absolute;
+        top: 8px;
+        left: -27px;
+
+        content: "";
+        width: 2px;
+        height: 100%;
+        background: map-get($map: $colors, $key: "background_3");
+      }
+
+      h5,
+      p {
+        padding: 0;
+        margin: 0;
+      }
+    }
+  }
+}

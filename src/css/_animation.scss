@@ -1,0 +1,275 @@
+@use "sass:math";
+
+@mixin global($theme) {
+
+  &.animation-delay {
+    $gridCol: 0.1;
+
+    @while $gridCol <=4 {
+      &.delay-#{$gridCol * 10} {
+        animation-delay: $gridCol;
+      }
+
+      $gridCol: $gridCol + .1;
+    }
+  }
+}
+
+@mixin error($theme) {
+  $colors: map-get($theme, 'colors');
+
+  &.animation-error {
+    animation: error ease-in-out .4s;
+  }
+
+  @keyframes error {
+    0% {
+      transform: translateX(-4px);
+    }
+
+    15% {
+      transform: translateX(4px);
+    }
+
+    30% {
+      transform: translateX(-4px);
+    }
+
+    45% {
+      transform: translateX(4px);
+    }
+
+    60% {
+      transform: translateX(-4px);
+    }
+
+    75% {
+      transform: translateX(4px);
+    }
+
+    100% {
+      transform: translateX(0);
+    }
+  }
+}
+
+@mixin underlined($theme) {
+  $colors: map-get($theme, 'colors');
+
+  @keyframes underlined {
+    0% {
+      background-size: 100% 100%;
+      background-position: bottom right;
+    }
+
+    50% {
+      background-size: 0 100%;
+      background-position: bottom right;
+    }
+
+    50.01% {
+      background-position: bottom left;
+    }
+
+    100% {
+      background-size: 100% 100%;
+      background-position: bottom left;
+    }
+  }
+}
+
+@mixin bounce($theme) {
+  $colors: map-get($theme, 'colors');
+
+  &.animation-bounce-top {
+    animation: bounceTop ease-in-out .4s;
+  }
+
+  @keyframes bounceTop {
+    0% {
+      transform: translateY(0%);
+    }
+
+    20% {
+      transform: translateY(-25%);
+    }
+
+    40% {
+      transform: translateY(0%);
+    }
+
+    60% {
+      transform: translateY(-12%);
+    }
+
+    65% {
+      transform: translateY(0%);
+    }
+
+    70% {
+      transform: translateY(-5%);
+    }
+
+    100% {
+      transform: translateY(0);
+    }
+  }
+}
+
+@mixin fadeIn($theme) {
+  &.animation-fade-in-right {
+    animation-name: fadeInRight;
+    animation-timing-function: ease-in-out;
+    animation-duration: .4s;
+  }
+
+  &.animation-fade-in-left {
+    animation-name: fadeInLeft;
+    animation-timing-function: ease-in-out;
+    animation-duration: .4s;
+  }
+
+  &.animation-fade-in-top {
+    animation-name: fadeInTop;
+    animation-timing-function: ease-in-out;
+    animation-duration: .4s;
+  }
+
+  &.animation-fade-in-bottom {
+    animation-name: fadeInBottom;
+    animation-timing-function: ease-in-out;
+    animation-duration: .4s;
+  }
+
+  &.animation-fade-in {
+    animation-name: fadeIn;
+    animation-timing-function: ease-in-out;
+    animation-duration: .4s;
+  }
+
+  @keyframes fadeInRight {
+    0% {
+      transform: translateX(20%);
+      opacity: 0;
+    }
+
+    0.5% {
+      transform: translateX(20%);
+      opacity: 0;
+    }
+
+    100% {
+      transform: translateX(0%);
+      opacity: 1;
+    }
+  }
+
+  @keyframes fadeInLeft {
+    0% {
+      transform: translateX(-20%);
+      opacity: 0;
+    }
+
+    0.5% {
+      transform: translateX(-20%);
+      opacity: 0;
+    }
+
+    100% {
+      transform: translateX(0%);
+      opacity: 1;
+    }
+  }
+
+  @keyframes fadeInBottom {
+    0% {
+      transform: translateY(20%);
+      opacity: 0;
+    }
+
+    0.5% {
+      transform: translateY(20%);
+      opacity: 0;
+    }
+
+    100% {
+      transform: translateY(0%);
+      opacity: 1;
+    }
+  }
+
+  @keyframes fadeInTop {
+    0% {
+      transform: translateY(-20%);
+      opacity: 0;
+    }
+
+    0.5% {
+      transform: translateY(-20%);
+      opacity: 0;
+    }
+
+    100% {
+      transform: translateY(0%);
+      opacity: 1;
+    }
+  }
+
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+    }
+
+    100% {
+      opacity: 1;
+    }
+  }
+}
+
+@mixin fadeOut($theme) {
+  &.animation-fade-out-left {
+    animation: fadeOutLeft ease-in-out .6s;
+  }
+
+  &.animation-fade-out-right {
+    animation: fadeOutRight ease-in-out .6s;
+  }
+
+  &.animation-fade-out {
+    animation: fadeOut ease-in-out .3s;
+  }
+
+  @keyframes fadeOutLeft {
+    0% {
+      transform: translateX(0%);
+      opacity: 1;
+    }
+
+    100% {
+      transform: translateX(-20%);
+      opacity: 0;
+    }
+  }
+
+  @keyframes fadeOutRight {
+    0% {
+      transform: translateX(0%);
+      opacity: 1;
+    }
+
+    100% {
+      transform: translateX(20%);
+      opacity: 0;
+    }
+  }
+
+  @keyframes fadeOut {
+    0% {
+      opacity: 1;
+    }
+
+    100% {
+      opacity: 0;
+    }
+  }
+}
