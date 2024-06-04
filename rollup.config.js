@@ -30,8 +30,8 @@ export default [
       typescript({ tsconfig: "./tsconfig.json" }),
       terser(),
       scss({
-        output: "./dist/css/style.css",
-        failOnError: true,
+        output: "./dist/style/style.css",
+        failOnError: false,
       }),
     ],
     external: ["react", "react-dom"],
