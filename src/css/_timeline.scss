@@ -1,0 +1,130 @@
+@mixin global($theme) {
+  $colors: map-get($theme, 'colors');
+  $schemas: map-get($theme, 'schemas');
+  $shades: map-get($map: $theme, $key: 'shades');
+  $brand: map-get($map: $theme, $key: 'brand');
+
+  &.timeline {
+    position: relative;
+
+    .line {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: calc(50% - 2px);
+
+      width: 4px;
+      border-radius: 4px;
+
+      @each $name, $value in $shades {
+        &.color-#{$name} {
+          background-image: linear-gradient(to bottom, transparent, $value);
+        }
+      }
+
+      @each $name, $value in $colors {
+        &.color-#{$name} {
+          background-image: linear-gradient(to bottom, transparent, $value);
+        }
+      }
+
+      @each $name, $value in $brand {
+        &.color-#{$name} {
+          background-image: linear-gradient(to bottom, transparent, $value);
+        }
+      }
+
+      @media all and (max-width: 768px) {
+        left: 16px;
+      }
+    }
+
+    .timeline-items {
+      display: grid;
+      justify-content: center;
+      justify-items: center;
+
+      position: relative;
+      z-index: 1;
+
+      padding-bottom: 160px;
+      padding-top: 160px;
+
+      .timeline-item {
+        display: grid;
+        column-gap: 8px;
+        row-gap: 16px;
+        grid-auto-flow: row;
+        grid-auto-rows: min-content;
+
+        position: relative;
+
+        margin-bottom: 48px;
+        width: 100%;
+        max-width: 400px;
+
+        &:after {
+          display: block;
+
+          position: absolute;
+          top: 12px;
+
+          content: '';
+          width: 16px;
+          height: 16px;
+          border-radius: 50%;
+          background: map-get($map: $colors, $key: 'content');
+
+          @media all and (max-width: 768px) {
+            left: -6px;
+            right: inherit;
+          }
+        }
+
+        @media all and (max-width: 768px) {
+          grid-column-start: 1;
+          grid-column-end: span 7;
+
+          margin: 48px 0;
+        }
+
+        h4,
+        p {
+          grid-column-start: 1;
+          grid-column-end: span 4;
+
+          margin: 0;
+
+          @media all and (max-width: 768px) {
+            grid-column-start: 2;
+          }
+        }
+
+        &:nth-child(odd) {
+          margin-top: 40px;
+          transform: translateX(50%) !important;
+          padding-left: 80px;
+
+          &:after {
+            right: auto;
+            left: -8px;
+          }
+        }
+
+        &:nth-child(2n) {
+          margin-top: 40px;
+          transform: translateX(-50%) !important;
+          padding-right: 80px;
+
+          &:after {
+            right: auto;
+            right: -8px;
+          }
+        }
+
+      }
+
+
+    }
+  }
+}

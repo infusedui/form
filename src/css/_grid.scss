@@ -1,0 +1,357 @@
+@use "sass:math";
+
+@mixin base($theme) {
+  $colors: map-get($map: $theme, $key: 'colors');
+  $shades: map-get($map: $theme, $key: 'shades');
+  $radius: map-get($map: $theme, $key: 'radius');
+
+  &.grid-init {
+    display: grid;
+    grid-auto-flow: row;
+    grid-auto-rows: min-content;
+
+    column-gap: 8px;
+    row-gap: 24px;
+
+    // Alignements
+    &.vertical-align-start {
+      align-items: start;
+      align-content: start;
+    }
+
+    &.vertical-align-center {
+      align-items: center;
+      align-content: center;
+    }
+
+    &.vertical-align-end {
+      align-items: end;
+      align-content: end;
+    }
+
+    &.vertical-align-stretch {
+      align-items: stretch;
+      align-content: stretch;
+    }
+
+    &.horizontal-align-start {
+      justify-items: start;
+      justify-content: start;
+    }
+
+    &.horizontal-align-center {
+      justify-items: center;
+      justify-content: center;
+    }
+
+    &.horizontal-align-end {
+      justify-items: end;
+      justify-content: end;
+    }
+
+    &.no-row-gap {
+      row-gap: 0;
+    }
+
+    &.no-column-gap {
+      column-gap: 0;
+    }
+
+    &.grid-row-auto {
+      grid-auto-rows: auto;
+    }
+
+    &.grid-row-fr {
+      grid-auto-rows: 1fr;
+    }
+
+    &.grid-row-max {
+      grid-auto-rows: max-content;
+    }
+
+    &.auto-flow-column {
+      grid-auto-flow: column;
+      grid-auto-columns: 1fr;
+      grid-template-rows: repeat(9, min-content);
+
+      @media all and (max-width: 992px) {
+        grid-auto-flow: row;
+        grid-auto-rows: 1fr;
+      }
+    }
+
+    &.format-page {
+      width: 90vw;
+      max-width: 900px;
+      margin: auto;
+
+      &.size-small {
+        width: 640px;
+        max-width: 90vw;
+      }
+
+      &.size-large {
+        width: 90vw;
+        max-width: 1100px;
+      }
+
+      &.size-fullscreen {
+        width: 90vw;
+        max-width: 1400px;
+      }
+    }
+
+    // Size vertical
+    $i: 1;
+
+    @while $i <=10 {
+      &.size-vertical-#{$i * 10} {
+        min-height: 10vh * $i;
+      }
+
+      &.max-size-vertical-#{$i * 10} {
+        max-height: 10vh * $i;
+        overflow: hidden;
+      }
+
+      $i: $i + 1;
+    }
+
+    @media all and (max-width: 768px) {
+      &.xs-size-vertical-auto {
+        min-height: auto !important;
+        max-height: auto !important;
+      }
+    }
+
+    // Radius 
+    &.radius-small {
+      border-radius: map-get($map: $radius, $key: 'small');
+    }
+
+    &.radius-medium {
+      border-radius: map-get($map: $radius, $key: 'medium');
+    }
+
+    &.radius-large {
+      border-radius: map-get($map: $radius, $key: 'large');
+    }
+
+    // Overflow
+    &.overflow-hidden {
+      overflow: hidden !important;
+    }
+
+    // Background
+    &.background-effect-blur {
+      backdrop-filter: blur(24px) saturate(180%);
+    }
+
+    &.background-color-main {
+      background-color: map-get($map: $colors, $key: 'main');
+    }
+
+    &.background-color-content {
+      background-color: map-get($map: $colors, $key: 'content');
+      color: map-get($map: $colors, $key: 'background_1');
+    }
+
+    &.background-color-bg1 {
+      background-color: map-get($map: $colors, $key: 'background_1');
+    }
+
+    &.background-color-bg2 {
+      background-color: map-get($map: $colors, $key: 'background_2');
+    }
+
+    &.background-color-bg3 {
+      background-color: map-get($map: $colors, $key: 'background_3');
+    }
+
+    // Row size
+    &.row-size-default {
+      grid-auto-rows: auto;
+    }
+
+    // Gap size
+    $k: 8;
+
+    @while $k <=240 {
+      @media all and (min-width: 768px) {
+        &.column-gap-size-#{$k} {
+          column-gap: 1px * $k;
+        }
+
+        &.row-gap-size-#{$k} {
+          row-gap: 1px * $k;
+        }
+      }
+
+      @media all and (max-width: 768px) {
+        &.xs-column-gap-size-#{$k} {
+          column-gap: 1px * $k;
+        }
+
+        &.xs-row-gap-size-#{$k} {
+          row-gap: 1px * $k;
+        }
+      }
+
+      $k: $k + 8;
+    }
+  }
+}
+
+@mixin row($theme) {
+
+  &.grid-init {
+    &.template-auto-row {
+      grid-auto-flow: row;
+      grid-auto-rows: min-content;
+
+      &.auto-row-1fr {
+        grid-auto-rows: 1fr;
+      }
+    }
+
+    $j: 1;
+
+    @while $j <=24 {
+      @media all and (min-width: 992px) {
+        &.template-#{$j}row {
+          grid-template-rows: repeat($j, 1fr);
+        }
+
+        .grid-start-#{$j}row {
+          grid-row-start: $j;
+        }
+
+        .grid-size-#{$j}row {
+          grid-row-end: span $j;
+        }
+      }
+
+      @media all and (min-width: 768px) and (max-width: 992px) {
+        &.ms-template-#{$j}row {
+          grid-template-rows: repeat($j, 1fr);
+        }
+
+        .ms-grid-start-#{$j}row {
+          grid-row-start: $j;
+        }
+
+        .ms-grid-size-#{$j}row {
+          grid-row-end: span $j;
+        }
+      }
+
+      @media all and (max-width: 768px) {
+        &.xs-template-#{$j}row {
+          grid-template-rows: repeat($j, 1fr);
+        }
+
+        .xs-grid-start-#{$j}row {
+          grid-row-start: $j;
+        }
+
+        .xs-grid-size-#{$j}row {
+          grid-row-end: span $j;
+        }
+      }
+
+      $j: $j + 1;
+    }
+  }
+}
+
+@mixin col($theme) {
+
+  &.grid-init {
+    &.template-auto-col {
+      grid-auto-flow: column;
+      grid-auto-columns: min-content;
+
+      &.auto-col-1fr {
+        grid-auto-columns: 1fr;
+      }
+    }
+
+    $j: 1;
+
+    @while $j <=24 {
+      @media all and (min-width: 992px) {
+        &.template-#{$j}col {
+          grid-template-columns: repeat($j, 1fr);
+        }
+
+        .grid-start-#{$j}col {
+          grid-column-start: $j;
+        }
+
+        .grid-size-#{$j}col {
+          grid-column-end: span $j;
+        }
+      }
+
+      @media all and (min-width: 768px) and (max-width: 992px) {
+        &.ms-template-#{$j}col {
+          grid-template-columns: repeat($j, 1fr);
+        }
+
+        .ms-grid-start-#{$j}col {
+          grid-column-start: $j;
+        }
+
+        .ms-grid-size-#{$j}col {
+          grid-column-end: span $j;
+        }
+      }
+
+      @media all and (max-width: 768px) {
+        &.xs-template-#{$j}col {
+          grid-template-columns: repeat($j, 1fr);
+        }
+
+        .xs-grid-start-#{$j}col {
+          grid-column-start: $j;
+        }
+
+        .xs-grid-size-#{$j}col {
+          grid-column-end: span $j;
+        }
+      }
+
+      $j: $j + 1;
+    }
+  }
+}
+
+@mixin border($theme) {
+  $colors: map-get($map: $theme, $key: 'colors');
+  $shades: map-get($map: $theme, $key: 'shades');
+  $brand: map-get($map: $theme, $key: 'brand');
+
+  &.grid-init.bordered {
+    border-style: solid;
+    border-width: 1px;
+
+    // making all colors variants
+    @each $name, $value in $colors {
+      &.border-color-#{$name} {
+        border-color: $value;
+      }
+    }
+
+    @each $name, $value in $shades {
+      &.border-color-#{$name} {
+        border-color: $value;
+      }
+    }
+
+    @each $name, $value in $brand {
+      &.border-color-#{$name} {
+        border-color: $value;
+      }
+    }
+  }
+}

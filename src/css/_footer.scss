@@ -1,0 +1,191 @@
+@mixin global($theme) {
+  $colors: map-get($map: $theme, $key: 'colors');
+  $brand: map-get($map: $theme, $key: 'brand');
+  $fontsize: map-get($map: $theme, $key: 'fontsize');
+  $radius: map-get($map: $theme, $key: 'radius');
+  $color_schemas: map-get($map: $theme, $key: 'color_schemas');
+
+  &.footer {
+    overflow: hidden;
+    background: map-get($map: $colors, $key: 'background_2');
+
+    // Format
+    &.format-simple {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      align-items: center;
+      align-content: center;
+      gap: 12px;
+
+      background: none;
+
+      a {
+        border-bottom: 1px solid transparent;
+
+        white-space: nowrap;
+        font-size: map-get($map: $fontsize, $key: 'small');
+
+        &:hover {
+          border-bottom-color: map-get($map: $colors, $key: 'content');
+        }
+      }
+    }
+
+    // Style
+    &.style-border {
+      border-top: 2px solid map-get($map: $colors, $key: 'content');
+      background: map-get($map: $colors, $key: 'background_1');
+    }
+
+    .footer-biglink {
+      width: fit-content;
+      border-bottom: 2px solid transparent;
+
+      font-size: map-get($map: $fontsize, $key: 'h1');
+
+      @media all and (max-width: 768px) {
+        font-size: map-get($map: $fontsize, $key: 'h4');
+      }
+
+      &:hover {
+        border-bottom-color: map-get($map: $colors, $key: 'content');
+      }
+    }
+
+    // Components
+
+    .copy {
+      display: grid;
+      grid-template-columns: 24px 1fr;
+      align-items: center;
+      align-content: center;
+      gap: 8px;
+
+      p {
+        margin: 0;
+        padding: 0;
+
+        white-space: nowrap;
+        font-size: map-get($map: $fontsize, $key: 'small');
+      }
+
+      img,
+      svg {
+        width: 24px;
+        fill: map-get($map: $colors, $key: 'content');
+      }
+    }
+
+    .footer-column {
+      h2 {
+        margin-top: 0;
+        padding-top: 0;
+      }
+
+      ul {
+        padding: 0;
+
+        li {
+          padding-bottom: 8px;
+          list-style: none;
+        }
+
+        a {
+          border-radius: 0;
+          background: none;
+          border-bottom: 1px solid transparent;
+          opacity: .6;
+
+          font-weight: 400;
+
+          &:hover {
+            border-bottom-color: map-get($map: $colors, $key: 'content');
+          }
+        }
+      }
+    }
+
+    .footer-social {
+      display: grid;
+      grid-auto-flow: column;
+      grid-auto-columns: 40px;
+      column-gap: 8px;
+
+      a.social-brand {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        background: map-get($colors, 'content');
+
+        color: map-get($colors, 'background_1');
+        transition:
+          background-color .3s;
+
+        &:target,
+        &:focus {
+          outline: 4px solid map-get($colors, 'transparent_main');
+          border-color: map-get($colors, 'background_1');
+        }
+
+        &:hover {
+          color: map-get($colors, 'background_1');
+          transition:
+            background-color .3s,
+            color .3s;
+
+          @if $color_schemas =='dark' {
+            color: map-get($colors, 'content');
+          }
+
+
+          &.social-facebook {
+            background: map-get($brand, 'facebook');
+          }
+
+          &.social-twitter {
+            background: map-get($brand, 'twitter');
+          }
+
+          &.social-instagram {
+            background: map-get($brand, 'instagram');
+          }
+
+          &.social-discord {
+            background: map-get($brand, 'discord');
+          }
+
+          &.social-linkedin {
+            background: map-get($brand, 'linkedin');
+          }
+
+          &.social-github {
+            background: map-get($brand, 'github');
+          }
+
+          &.social-threads {
+            background: map-get($brand, 'threads');
+          }
+        }
+      }
+    }
+
+    .footer-big-text {
+      display: grid;
+      align-items: center;
+      justify-content: center;
+
+      margin-bottom: -32px;
+
+      color: map-get($map: $colors, $key: 'main');
+      font-size: 240px;
+      white-space: nowrap;
+      font-weight: 900;
+      text-align: center;
+    }
+  }
+}

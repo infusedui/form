@@ -1,0 +1,43 @@
+@mixin player($theme) {
+  $radius: map-get($map: $theme, $key: 'radius');
+  $colors: map-get($map: $theme, $key: 'colors');
+
+  video {
+    border: 2px solid map-get($map: $colors, $key: 'content');
+    border-radius: map-get($map: $radius, $key: "large");
+  }
+
+  &.video-player-container {
+    .video-player-dock {
+      display: grid;
+      grid-template-columns: 1fr;
+      grid-template-rows: 1fr;
+
+      position: relative;
+
+      width: 100%;
+      aspect-ratio: 16/9;
+
+      video {
+        width: 100%;
+      }
+
+      .video-player-ambient,
+      .video-player-content {
+        grid-column-start: 1;
+        grid-row-start: 1;
+
+        position: relative;
+      }
+
+      .video-player-content {
+        z-index: 1;
+      }
+
+      .video-player-ambient video {
+        opacity: .6;
+        filter: blur(80px);
+      }
+    }
+  }
+}

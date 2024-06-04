@@ -1,0 +1,35 @@
+@mixin images($theme) {
+  $radius: map-get($map: $theme, $key: 'radius');
+
+  &.avatar {
+    aspect-ratio: 1/1;
+
+    &.size-small {
+      width: 24px;
+
+      &.shape-rounded {
+        border-radius: map-get($map: $radius, $key: 'small');
+      }
+    }
+
+    &.size-medium {
+      width: 48px;
+
+      &.shape-rounded {
+        border-radius: map-get($map: $radius, $key: 'medium');
+      }
+    }
+
+    &.size-large {
+      width: 96px;
+
+      &.shape-rounded {
+        border-radius: map-get($map: $radius, $key: 'large');
+      }
+    }
+
+    &.shape-circle {
+      border-radius: 50%;
+    }
+  }
+}

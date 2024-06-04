@@ -1,0 +1,145 @@
+@mixin container($theme) {
+  $radius: map-get($map: $theme, $key: "radius");
+  $colors: map-get($map: $theme, $key: "colors");
+
+  &.card-container {
+    display: grid;
+    gap: 8px;
+
+    @extend .grid-init;
+
+    &.format-card-group {
+      column-gap: 0;
+
+      .card {
+        border-radius: 0;
+        margin-left: -1px;
+        border-color: rgba(map-get($colors, "content"), .3);
+        background-color: darken($color: map-get($colors, "background_1"), $amount: 5%);
+
+        &:hover {
+          background-color: rgba(map-get($colors, 'content'), $alpha: .1);
+        }
+
+        &:first-child {
+          border-radius:
+            map-get($map: $radius, $key: "small") 0 0 map-get($map: $radius, $key: "small");
+          margin-left: 0;
+        }
+
+        &:last-child {
+          border-radius:
+            0 map-get($map: $radius, $key: "small") map-get($map: $radius, $key: "small") 0;
+        }
+      }
+    }
+  }
+}
+
+@mixin card($theme) {
+  $colors: map-get($map: $theme, $key: "colors");
+  $color_schemas: map-get($map: $theme, $key: "color_schemas");
+  $radius: map-get($map: $theme, $key: "radius");
+
+  a.card {
+    transition:
+      box-shadow .3s ease-in-out,
+      background-color .3s ease-in-out,
+      border-color .3s ease-in-out;
+
+    &:hover {
+      @if($color_schemas =="dark") {
+        background-color: lighten($color: map-get($colors, 'background_2'), $amount: 5%);
+      }
+
+      @else {
+        background-color: darken($color: map-get($colors, 'background_2'), $amount: 5%);
+      }
+    }
+  }
+
+  &.card {
+    display: grid;
+    row-gap: 24px;
+
+    border-radius: map-get($map: $radius, $key: 'small');
+    border: 1px solid transparent;
+    background: map-get($map: $colors, $key: 'background_2');
+    padding: 16px;
+
+    color: map-get($map: $colors, $key: 'content');
+    text-decoration: none;
+
+    &.format-square {
+      aspect-ratio: 1/1;
+    }
+
+    &.active {
+      border: 1px solid map-get($map: $colors, $key: 'main');
+    }
+
+    &.horizontal-align-center {
+      justify-content: center;
+      justify-items: center;
+    }
+
+    &.vertical-align-center {
+      align-content: center;
+      align-items: center;
+    }
+
+    &.format-row-actions {
+      grid-template-rows: min-content 1fr min-content;
+    }
+
+    &.format-row-testimonial {
+      grid-template-rows: 1fr min-content;
+    }
+
+    &.format-row-illustration {
+      grid-template-rows: min-content 1fr min-content;
+
+      .image {
+        aspect-ratio: 1/1;
+        overflow: hidden;
+
+        img {
+          width: 100%;
+        }
+      }
+    }
+
+    &.format-col-icon-right {
+      grid-template-columns: 1fr 40px;
+
+      .icon {
+        align-self: center;
+      }
+    }
+
+    &.format-col-icon-left {
+      grid-template-columns: 40px 1fr;
+
+      .icon {
+        align-self: center;
+      }
+    }
+
+    .text-container {
+      display: grid;
+      grid-auto-flow: row;
+      grid-auto-rows: min-content;
+      gap: 8px;
+
+      h2,
+      h3,
+      h4,
+      h5,
+      h6,
+      p {
+        margin: 0;
+        padding: 0;
+      }
+    }
+  }
+}
