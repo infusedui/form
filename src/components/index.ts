@@ -1,3 +1,5 @@
+import "../css/App.scss";
+
 export * from "./autocomplete";
 export * from "./checkbox";
 export * from "./datepicker";
