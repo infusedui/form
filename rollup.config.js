@@ -34,7 +34,7 @@ export default [
         failOnError: false,
       }),
     ],
-    external: ["react", "react-dom"],
+    external: ["react", "react-dom", "framer-motion"],
   },
   {
     input: "src/index.ts",
