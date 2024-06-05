@@ -1,10 +1,15 @@
 {
   "name": "@infusedui/form",
-  "version": "1.0.4",
+  "version": "1.4.0",
   "description": "",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
-  "types": "dist/index.d.ts",
+  "types": "dist/types.d.ts",
+  "private": false,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/infusedui/form.git"
+  },
   "files": [
     "dist"
   ],
@@ -14,7 +19,7 @@
     "pub": "rollup -c --bundleConfigAsCjs && npm publish"
   },
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com/infusedui"
+    "@infusedui:registry": "https://npm.pkg.github.com"
   },
   "author": "",
   "license": "ISC",
