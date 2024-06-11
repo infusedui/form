@@ -137,6 +137,7 @@ export const DatePicker: React.FC<DatePickerProps> = ({
     const buildMonthDate = () => {
       const monthDateList: DayArrayProps[] = [];
       const firstDay = new Date(`${activeYear}-${activeMonth + 1}-01`).getDay();
+      const today = new Date();
 
       switch (firstDay) {
         case 0:
@@ -227,6 +228,17 @@ export const DatePicker: React.FC<DatePickerProps> = ({
             actualDay.getDay() === 6
           ) {
             // lock sunday
+            monthDateList.push({ day: actualDay.getDate(), disabled: true });
+          } else if (
+            disabled &&
+            disabled?.indexOf("old") >= 0 &&
+            (actualDay.getFullYear() < today.getFullYear() ||
+              (actualDay.getFullYear() === today.getFullYear() &&
+                actualDay.getMonth() < today.getMonth()) ||
+              (actualDay.getFullYear() === today.getFullYear() &&
+                actualDay.getMonth() === today.getMonth() &&
+                actualDay.getDate() < today.getDate()))
+          ) {
             monthDateList.push({ day: actualDay.getDate(), disabled: true });
           } else {
             if (blockedDate && blockedDate.indexOf(stringDate) >= 0) {
@@ -360,6 +372,7 @@ export const DatePicker: React.FC<DatePickerProps> = ({
                             }-${day.day < 10 ? `0${day.day}` : day.day}`
                           );
                           setActiveDay(day.day);
+                          setOpenCalendar(false);
                         }}
                         key={key}
                       >
