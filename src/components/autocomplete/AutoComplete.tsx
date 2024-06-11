@@ -2,7 +2,6 @@ import { useEffect, useId, useState } from "react";
 import { AutoCompleteProps, DataItems } from "./AutoComplete.types";
 import { BaseBlock, InputBlock } from "../base/Base";
 import { AnimatePresence, motion } from "framer-motion";
-import { Link } from "react-router-dom";
 import SimpleBar from "simplebar-react";
 import "simplebar-react/dist/simplebar.min.css";
 
@@ -55,7 +54,7 @@ const AutoComplete: React.FC<AutoCompleteProps> = ({
   return (
     <BaseBlock id={id} label={label} size={size} required={required}>
       <InputBlock error={error}>
-        <div className="teaui AutoComplete-root-input">
+        <div className="teaui autocomplete-root-input">
           <input
             disabled={locked ? locked : false}
             name={id}
@@ -63,7 +62,7 @@ const AutoComplete: React.FC<AutoCompleteProps> = ({
             readOnly={readOnly ? readOnly : false}
             maxLength={maxLength && maxLength}
             placeholder={placeHolder ? placeHolder : ""}
-            className="teaui-AutoComplete-root-filter"
+            className="teaui-autocomplete-root-filter"
             value={inputLabel}
             onChange={(event) => {
               setInputLabel(event.target.value);
@@ -83,8 +82,10 @@ const AutoComplete: React.FC<AutoCompleteProps> = ({
               setFilteredData(data);
               setListVisibility(!listVisibility);
             }}
-            className={`icon dtc-icon ${
-              listVisibility ? "dtc-icon-chevron-up" : "dtc-icon-chevron-down"
+            className={`icon ${
+              listVisibility
+                ? "teaui-icon-chevron-up"
+                : "teaui-icon-chevron-down"
             }`}
           ></i>
         </div>
@@ -94,16 +95,15 @@ const AutoComplete: React.FC<AutoCompleteProps> = ({
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="teaui form-AutoComplete-list-root"
-              id="teaui_AutoComplete_root_list"
+              className="teaui form-autocomplete-list-root"
+              id="teaui_autocomplete_root_list"
             >
               <SimpleBar style={{ maxHeight: "240px" }}>
                 <div className="teaui form-autocomplete-list">
                   <AnimatePresence>
                     {filteredData.map((option) => {
                       return (
-                        <Link
-                          to={""}
+                        <div
                           onClick={() => {
                             setContent(option.value);
                             setInputLabel(option.label);
@@ -113,7 +113,7 @@ const AutoComplete: React.FC<AutoCompleteProps> = ({
                           key={option.value}
                         >
                           <span>{option.label}</span>
-                        </Link>
+                        </div>
                       );
                     })}
                   </AnimatePresence>

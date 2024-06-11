@@ -11,7 +11,8 @@ export type DisabledOption =
   | "friday"
   | "saturday"
   | "sunday"
-  | "weekend";
+  | "weekend"
+  | "old";
 
 export interface DatePickerProps {
   content: string;
