@@ -12,3 +12,4 @@ export * from "./select";
 export * from "./submit";
 export * from "./textarea";
 export * from "./draganddrop";
+export * from "./totpinput";
