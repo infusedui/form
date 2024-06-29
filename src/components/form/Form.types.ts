@@ -1,5 +1,7 @@
+import { FormEvent } from "react";
+
 export interface FormProps {
   children: React.ReactNode;
-  handler: () => void;
+  handler: (event: FormEvent<HTMLFormElement>) => void;
   encType?: string;
 }
