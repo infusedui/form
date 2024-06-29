@@ -18,7 +18,7 @@ const Submit: React.FC<SubmitProps> = ({
       {otherAction && (
         <Link
           to={otherAction.link}
-          className={`teaui cta level-tertiary size-large ${
+          className={`teaui cta level-tertiary ${
             !otherAction.iconHide
               ? otherAction.visible
                 ? "format-icon-left"
@@ -42,7 +42,7 @@ const Submit: React.FC<SubmitProps> = ({
       )}
 
       <button
-        className="teaui cta level-primary color-main format-icon-right size-large"
+        className="teaui cta level-primary color-main format-icon-right"
         disabled={loading || locked ? true : false}
       >
         <span>{label}</span>
