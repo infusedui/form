@@ -53,7 +53,9 @@ export const InputBlock: React.FC<InputBlockProps> = ({
       }`}
     >
       {children}
-      {error && <p className="teaui form-message">{error}</p>}
+      {error && typeof error === "string" && (
+        <p className="teaui form-message">{error}</p>
+      )}
     </div>
   );
 };

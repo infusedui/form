@@ -12,7 +12,7 @@ export interface BaseBlockProps {
 
 export interface InputBlockProps {
   children: React.ReactNode;
-  error: string;
+  error: string | boolean;
   maxLength?: number;
 }
 
