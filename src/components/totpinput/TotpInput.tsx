@@ -1,18 +1,15 @@
 import { TotpInputProps } from "./TotpInput.types";
 import { BaseBlock, InputBlock } from "../base/Base";
-import { useEffect, useId, useRef, useState } from "react";
+import { useId, useRef, useState } from "react";
 import "./TotpInput.scss";
 
 const TotpInput: React.FC<TotpInputProps> = ({
   label,
-  content,
   setContent,
   error,
   size,
   locked,
   required,
-  name,
-  autofocus,
   totpSize = 6,
 }) => {
   const [values, setValues] = useState<string[]>(Array(totpSize).fill(""));
@@ -49,10 +46,10 @@ const TotpInput: React.FC<TotpInputProps> = ({
       size={size}
       required={required ? true : false}
     >
-      <div className="infusedui-totp-root">
+      <div className={`infusedui-totp-root ${error ? "state-negative" : ""}`}>
         <div className="totp-fields">
           {Array.from({ length: totpSize }, (_, key) => (
-            <InputBlock key={key} error="">
+            <InputBlock key={key} error={error ? true : false}>
               <input
                 ref={(element) => (inputsRef.current[key] = element)}
                 type="text"
@@ -61,11 +58,13 @@ const TotpInput: React.FC<TotpInputProps> = ({
                 onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
                   inputHandler(key, event.target.value)
                 }
+                readOnly={locked ? locked : false}
                 onKeyDown={(event) => handleKeyDown(key, event)}
               />
             </InputBlock>
           ))}
         </div>
+        {error && <p className="teaui form-message">{error}</p>}
       </div>
     </BaseBlock>
   );
