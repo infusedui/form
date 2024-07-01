@@ -1,5 +1,5 @@
 export interface SubmitProps {
-  size: number;
+  size?: number;
   loading: boolean;
   label: string;
   otherAction?: {
