@@ -12,4 +12,5 @@ export interface PasswordProps {
   isNew?: boolean;
   placeHolder?: string;
   locked?: boolean;
+  className?: string;
 }

@@ -25,4 +25,5 @@ export interface DatePickerProps {
   label?: string;
   blockedDate?: string[];
   disabled?: DisabledOption[];
+  className?: string;
 }

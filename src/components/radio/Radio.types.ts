@@ -13,4 +13,5 @@ export interface RadioProps {
   error: string;
   label?: string;
   size?: number;
+  className?: string;
 }

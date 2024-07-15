@@ -9,12 +9,13 @@ const Checkbox: React.FC<CheckboxProps> = ({
   content,
   setContent,
   locked,
+  className,
 }) => {
   const id = useId();
 
   return (
     <InputBlock error={error}>
-      <div className="teaui form-checkbox">
+      <div className={`teaui form-checkbox ${className}`}>
         <input
           type="checkbox"
           name={id}

@@ -7,4 +7,5 @@ export interface MessageContentTypes {
 
 export interface MessageProps {
   data: MessageContentTypes | null;
+  className?: string;
 }

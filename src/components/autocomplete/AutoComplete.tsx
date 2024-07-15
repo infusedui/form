@@ -17,6 +17,7 @@ const AutoComplete: React.FC<AutoCompleteProps> = ({
   locked,
   data,
   required,
+  className,
 }) => {
   const id = useId();
 
@@ -54,7 +55,7 @@ const AutoComplete: React.FC<AutoCompleteProps> = ({
   return (
     <BaseBlock id={id} label={label} size={size} required={required}>
       <InputBlock error={error}>
-        <div className="teaui autocomplete-root-input">
+        <div className={`teaui autocomplete-root-input ${className}`}>
           <input
             disabled={locked ? locked : false}
             name={id}

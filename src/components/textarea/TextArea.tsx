@@ -14,6 +14,7 @@ const TextArea: React.FC<TextAreaProps> = ({
   placeHolder,
   locked,
   rows,
+  className,
 }) => {
   const id = useId();
   const [actualContentSize, setActualContentSize] = useState(0);
@@ -30,6 +31,7 @@ const TextArea: React.FC<TextAreaProps> = ({
           maxLength={maxLength && maxLength}
           placeholder={placeHolder ? placeHolder : ""}
           rows={rows}
+          className={className}
           onChange={(event: React.ChangeEvent<HTMLTextAreaElement>) => {
             const target = event.target as HTMLTextAreaElement;
             setContent(target.value);

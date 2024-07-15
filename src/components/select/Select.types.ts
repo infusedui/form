@@ -6,4 +6,5 @@ export interface SelectProps {
   label?: string;
   size?: number;
   locked?: boolean;
+  className?: string;
 }

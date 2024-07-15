@@ -11,6 +11,7 @@ const DragAndDrop: React.FC<DragAndDropProps> = ({
   authorizedFiles,
   multipleUpload,
   error,
+  className,
 }) => {
   const [files, setFiles] = useState<File[] | null>(null);
   const [fileLabel, setFileLabel] = useState("");
@@ -46,7 +47,7 @@ const DragAndDrop: React.FC<DragAndDropProps> = ({
   return (
     <BaseBlock id="" label={label} size={size}>
       <InputBlock error={error}>
-        <div className="teaui form-drag-n-drop">
+        <div className={`teaui form-drag-n-drop ${className}`}>
           <FileUploader
             handleChange={handleChange}
             name="file"

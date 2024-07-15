@@ -6,4 +6,5 @@ export interface TotpInputProps {
   locked?: boolean;
   required?: boolean;
   totpSize?: number;
+  className?: string;
 }

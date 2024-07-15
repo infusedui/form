@@ -15,4 +15,5 @@ export interface TagInputProps {
   required?: boolean;
   name?: string;
   autofocus?: boolean;
+  className?: string;
 }

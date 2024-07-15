@@ -16,6 +16,7 @@ const Input: React.FC<TagInputProps> = ({
   name,
   autofocus,
   separator = [","],
+  className,
 }) => {
   const id = useId();
 
@@ -48,7 +49,7 @@ const Input: React.FC<TagInputProps> = ({
           onKeyUp={handleKey}
         />
       </InputBlock>
-      <div className="infusedui-tag-root">
+      <div className={`infusedui-tag-root ${className}`}>
         {content.map((tag, index) => (
           <span
             className="infusedui-tag"

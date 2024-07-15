@@ -1,7 +1,7 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { MessageProps } from "./Message.types";
 
-const Message: React.FC<MessageProps> = ({ data }) => {
+const Message: React.FC<MessageProps> = ({ data, className }) => {
   return (
     data && (
       <AnimatePresence>
@@ -10,7 +10,7 @@ const Message: React.FC<MessageProps> = ({ data }) => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className={`teaui message-container ${
+            className={`teaui message-container ${className} ${
               data.type ? `color-${data.type}` : ""
             } ${data.format ? `format-${data.format}` : ""}`}
           >

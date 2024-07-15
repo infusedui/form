@@ -10,4 +10,5 @@ export interface SubmitProps {
     label: string;
   };
   locked?: boolean;
+  className?: string;
 }

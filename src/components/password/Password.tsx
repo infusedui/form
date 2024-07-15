@@ -13,6 +13,7 @@ const Password: React.FC<PasswordProps> = ({
   isNew,
   placeHolder,
   locked,
+  className,
 }) => {
   const id = useId();
   const [passwordVisibility, setPasswordVisibility] = useState(false);
@@ -31,7 +32,7 @@ const Password: React.FC<PasswordProps> = ({
     <BaseBlock id={id} label={label} tagline={tagline} size={size}>
       <InputBlock error={error}>
         <div
-          className="teaui form-password"
+          className={`teaui form-password ${className}`}
           onMouseLeave={() => {
             setPasswordVisibility(false);
           }}

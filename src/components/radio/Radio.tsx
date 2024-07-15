@@ -11,6 +11,7 @@ const Radio: React.FC<RadioProps> = ({
   content,
   setContent,
   error,
+  className,
 }) => {
   const id = useId();
 
@@ -22,7 +23,7 @@ const Radio: React.FC<RadioProps> = ({
             key={key}
             className={`teaui ${
               viewBox ? "form-radio" : "form-radio-no-check"
-            }`}
+            } ${className}`}
           >
             <input
               type="radio"

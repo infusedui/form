@@ -9,4 +9,5 @@ export interface FileInputProps {
     label: string;
   };
   required?: boolean;
+  className?: string;
 }

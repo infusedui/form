@@ -13,4 +13,5 @@ export interface TextAreaProps {
   placeHolder?: string;
   locked?: boolean;
   rows?: number;
+  className?: string;
 }

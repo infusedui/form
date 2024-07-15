@@ -14,6 +14,7 @@ export const DatePicker: React.FC<DatePickerProps> = ({
   label,
   blockedDate,
   disabled,
+  className,
 }) => {
   const id = useId();
   const [openCalendar, setOpenCalendar] = useState<boolean>(false);
@@ -259,7 +260,7 @@ export const DatePicker: React.FC<DatePickerProps> = ({
   return (
     <BaseBlock id={id} size={size} label={label} required={required}>
       <InputBlock error={error}>
-        <div className="teaui datepicker-root-input">
+        <div className={`teaui datepicker-root-input ${className}`}>
           <input
             disabled={locked ? locked : false}
             name={id}

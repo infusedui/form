@@ -11,6 +11,7 @@ const TotpInput: React.FC<TotpInputProps> = ({
   locked,
   required,
   totpSize = 6,
+  className,
 }) => {
   const [values, setValues] = useState<string[]>(Array(totpSize).fill(""));
   const inputsRef = useRef<(HTMLInputElement | null)[]>([]);
@@ -46,7 +47,11 @@ const TotpInput: React.FC<TotpInputProps> = ({
       size={size}
       required={required ? true : false}
     >
-      <div className={`infusedui-totp-root ${error ? "state-negative" : ""}`}>
+      <div
+        className={`infusedui-totp-root ${
+          error ? "state-negative" : ""
+        } ${className}`}
+      >
         <div className="totp-fields">
           {Array.from({ length: totpSize }, (_, key) => (
             <InputBlock key={key} error={error ? true : false}>

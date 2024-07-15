@@ -9,12 +9,13 @@ const Submit: React.FC<SubmitProps> = ({
   otherAction,
   loading,
   locked,
+  className,
 }) => {
   return (
     <div
       className={`teaui form-container form-submit ${
         size ? `block-size-${size}x` : ""
-      }`}
+      } ${className}`}
     >
       {otherAction && (
         <Link

@@ -19,6 +19,7 @@ const Input: React.FC<InputProps> = ({
   required,
   name,
   autofocus,
+  className,
 }) => {
   const id = useId();
   const [actualContentSize, setActualContentSize] = useState(
@@ -50,6 +51,7 @@ const Input: React.FC<InputProps> = ({
           maxLength={maxLength && maxLength}
           placeholder={placeHolder ? placeHolder : ""}
           autoFocus={autofocus ? true : false}
+          className={className}
           onChange={(event) => {
             setContent(event.target.value);
 
