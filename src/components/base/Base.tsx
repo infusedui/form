@@ -18,7 +18,7 @@ export const BaseBlock: React.FC<BaseBlockProps> = ({
 }) => {
   return (
     <div
-      className={`teaui form-container ${size ? `grid-size-${size}col` : ""} ${
+      className={`teaui form-container ${size ? `gwc-${size}` : ""} ${
         label ? "template-label" : "template-default"
       }`}
     >
