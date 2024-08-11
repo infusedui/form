@@ -1,12 +1,9 @@
 import {
   BaseBlockProps,
   InputBlockProps,
-  LoaderProps,
   RadioCheckboxBlockProps,
   SelectBlockProps,
 } from "./Base.types";
-
-import { Link } from "react-router-dom";
 
 export const BaseBlock: React.FC<BaseBlockProps> = ({
   id,
@@ -30,13 +27,7 @@ export const BaseBlock: React.FC<BaseBlockProps> = ({
         ""
       )}
       {children}
-      {tagline ? (
-        <Link className="teaui form-tagline" to={tagline.link}>
-          {tagline.label}
-        </Link>
-      ) : (
-        ""
-      )}
+      {tagline && tagline}
     </div>
   );
 };

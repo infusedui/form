@@ -6,10 +6,7 @@ export interface TagInputProps {
   label?: string;
   size?: number;
   readOnly?: boolean;
-  tagline?: {
-    link: string;
-    label: string;
-  };
+  tagline?: React.ReactNode;
   placeHolder?: string;
   locked?: boolean;
   required?: boolean;

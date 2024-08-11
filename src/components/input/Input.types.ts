@@ -5,10 +5,7 @@ export interface InputProps {
   label?: string;
   size?: number;
   readOnly?: boolean;
-  tagline?: {
-    link: string;
-    label: string;
-  };
+  tagline?: React.ReactNode;
   type?: string;
   maxLength?: number;
   placeHolder?: string;
