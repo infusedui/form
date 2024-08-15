@@ -1,8 +1,11 @@
+export interface MessageContentTypes {
+  type: "negative" | "positive" | "warning" | "main";
+  content: string;
+  format?: "icon" | "icon-cta" | "cta";
+  icon?: string;
+}
+
 export interface MessageProps {
-  data: {
-    type: "negative" | "positive" | "warning" | "main";
-    content: string;
-    format?: "icon" | "icon-cta" | "cta";
-    icon?: string;
-  };
+  data: MessageContentTypes | null;
+  className?: string;
 }

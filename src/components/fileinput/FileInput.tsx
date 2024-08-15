@@ -10,6 +10,7 @@ const FileInput: React.FC<FileInputProps> = ({
   tagline,
   required,
   accept = [],
+  className,
 }) => {
   const id = useId();
   const [fileSelectedLabel, setFileSelectedLabel] = useState("");
@@ -23,7 +24,7 @@ const FileInput: React.FC<FileInputProps> = ({
       required={required}
     >
       <InputBlock error={error}>
-        <div className="teaui form-file">
+        <div className={`teaui form-file ${className}`}>
           <input
             type="file"
             id={id}

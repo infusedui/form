@@ -5,11 +5,9 @@ export interface PasswordProps {
   error: string;
   size?: number;
   readOnly?: boolean;
-  tagline?: {
-    link: string;
-    label: string;
-  };
+  tagline?: React.ReactNode;
   isNew?: boolean;
   placeHolder?: string;
   locked?: boolean;
+  className?: string;
 }

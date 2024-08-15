@@ -15,4 +15,5 @@ export interface AutoCompleteProps {
   maxLength?: number;
   placeHolder?: string;
   required?: boolean;
+  className?: string;
 }

@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { SubmitProps } from "./Submit.types";
-import { Loader } from "../base/Base";
+import { Loader } from "@infusedui/core";
+import "@infusedui/core/dist/infusedui.style.css";
 
 const Submit: React.FC<SubmitProps> = ({
   size,
@@ -8,12 +9,13 @@ const Submit: React.FC<SubmitProps> = ({
   otherAction,
   loading,
   locked,
+  className,
 }) => {
   return (
     <div
       className={`teaui form-container form-submit ${
         size ? `block-size-${size}x` : ""
-      }`}
+      } ${className}`}
     >
       {otherAction && (
         <Link

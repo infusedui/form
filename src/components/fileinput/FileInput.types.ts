@@ -4,9 +4,7 @@ export interface FileInputProps {
   accept: string[];
   label?: string;
   size?: number;
-  tagline?: {
-    link: string;
-    label: string;
-  };
+  tagline?: React.ReactNode;
   required?: boolean;
+  className?: string;
 }

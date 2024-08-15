@@ -3,16 +3,13 @@ export interface BaseBlockProps {
   children: React.ReactNode;
   label?: string;
   size?: number;
-  tagline?: {
-    link: string;
-    label: string;
-  };
+  tagline?: React.ReactNode;
   required?: boolean;
 }
 
 export interface InputBlockProps {
   children: React.ReactNode;
-  error: string;
+  error: string | boolean;
   maxLength?: number;
 }
 

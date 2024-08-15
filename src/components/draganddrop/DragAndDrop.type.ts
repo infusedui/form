@@ -6,4 +6,5 @@ export interface DragAndDropProps {
   setContent: React.Dispatch<React.SetStateAction<File | File[]>>;
   authorizedFiles: string[];
   multipleUpload: boolean;
+  className?: string;
 }

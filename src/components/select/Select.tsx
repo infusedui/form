@@ -10,6 +10,7 @@ const Select: React.FC<SelectProps> = ({
   size,
   children,
   locked,
+  className,
 }) => {
   const id = useId();
 
@@ -24,6 +25,7 @@ const Select: React.FC<SelectProps> = ({
             setContent(event.target.value);
           }}
           disabled={locked ? locked : false}
+          className={className}
         >
           {children}
         </select>

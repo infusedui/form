@@ -5,4 +5,5 @@ export interface CheckboxProps {
   setContent: React.Dispatch<React.SetStateAction<string | boolean | number>>;
   value?: string | number;
   locked?: boolean;
+  className?: string;
 }

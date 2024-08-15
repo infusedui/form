@@ -1,12 +1,9 @@
 import {
   BaseBlockProps,
   InputBlockProps,
-  LoaderProps,
   RadioCheckboxBlockProps,
   SelectBlockProps,
 } from "./Base.types";
-
-import { Link } from "react-router-dom";
 
 export const BaseBlock: React.FC<BaseBlockProps> = ({
   id,
@@ -18,7 +15,7 @@ export const BaseBlock: React.FC<BaseBlockProps> = ({
 }) => {
   return (
     <div
-      className={`teaui form-container ${size ? `grid-size-${size}col` : ""} ${
+      className={`teaui form-container ${size ? `gwc-${size}` : ""} ${
         label ? "template-label" : "template-default"
       }`}
     >
@@ -30,13 +27,7 @@ export const BaseBlock: React.FC<BaseBlockProps> = ({
         ""
       )}
       {children}
-      {tagline ? (
-        <Link className="teaui form-tagline" to={tagline.link}>
-          {tagline.label}
-        </Link>
-      ) : (
-        ""
-      )}
+      {tagline && tagline}
     </div>
   );
 };
@@ -53,7 +44,9 @@ export const InputBlock: React.FC<InputBlockProps> = ({
       }`}
     >
       {children}
-      {error && <p className="teaui form-message">{error}</p>}
+      {error && typeof error === "string" && (
+        <p className="teaui form-message">{error}</p>
+      )}
     </div>
   );
 };
@@ -91,15 +84,5 @@ export const SelectBlock: React.FC<SelectBlockProps> = ({
       <i className="icon teaui-icon-chevron-down"></i>
       {error ? <p className="teaui form-message">{error}</p> : ""}
     </div>
-  );
-};
-
-export const Loader: React.FC<LoaderProps> = ({ size }) => {
-  return (
-    <span className={`teaui loader ${size ? `size-${size}` : ""}`}>
-      <svg viewBox="25 25 50 50">
-        <circle r="20" cy="50" cx="50"></circle>
-      </svg>
-    </span>
   );
 };
