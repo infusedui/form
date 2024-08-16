@@ -1,6 +1,6 @@
 export interface InputProps {
-  content: string;
-  setContent: React.Dispatch<React.SetStateAction<string>>;
+  content: any;
+  setContent: React.Dispatch<React.SetStateAction<any>>;
   error: string;
   label?: string;
   size?: number;
