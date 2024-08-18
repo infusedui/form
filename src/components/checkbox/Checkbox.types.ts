@@ -1,8 +1,8 @@
 export interface CheckboxProps {
   children: React.ReactNode;
   error: string;
-  content: string | boolean;
-  setContent: React.Dispatch<React.SetStateAction<string | boolean | number>>;
+  content: any;
+  setContent: React.Dispatch<React.SetStateAction<any>>;
   value?: string | number;
   locked?: boolean;
   className?: string;
