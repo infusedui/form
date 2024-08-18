@@ -15,6 +15,7 @@ export const DatePicker: React.FC<DatePickerProps> = ({
   blockedDate,
   disabled,
   className,
+  disabledTodayButton = false,
 }) => {
   const id = useId();
   const [openCalendar, setOpenCalendar] = useState<boolean>(false);
@@ -296,22 +297,23 @@ export const DatePicker: React.FC<DatePickerProps> = ({
                   <i className="icon teaui-icon-carret-left"></i>
                 </button>
                 <div>
-                  {(new Date().getMonth() !== activeMonth ||
-                    new Date().getFullYear() !== activeYear) && (
-                    <button
-                      onClick={(
-                        event: React.MouseEvent<HTMLButtonElement, MouseEvent>
-                      ) => {
-                        event.preventDefault();
-                        const today = new Date();
+                  {!disabledTodayButton &&
+                    (new Date().getMonth() !== activeMonth ||
+                      new Date().getFullYear() !== activeYear) && (
+                      <button
+                        onClick={(
+                          event: React.MouseEvent<HTMLButtonElement, MouseEvent>
+                        ) => {
+                          event.preventDefault();
+                          const today = new Date();
 
-                        setActiveMonth(today.getMonth());
-                        setActiveYear(today.getFullYear());
-                      }}
-                    >
-                      Aujourd'hui
-                    </button>
-                  )}
+                          setActiveMonth(today.getMonth());
+                          setActiveYear(today.getFullYear());
+                        }}
+                      >
+                        Aujourd'hui
+                      </button>
+                    )}
                   <select
                     className="teaui margin-8-right"
                     value={activeMonth}
