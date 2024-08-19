@@ -57,7 +57,7 @@ const TotpInput: React.FC<TotpInputProps> = ({
             <InputBlock key={key} error={error ? true : false}>
               <input
                 ref={(element) => (inputsRef.current[key] = element)}
-                type="text"
+                type="number"
                 value={values[key]}
                 maxLength={1}
                 onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
