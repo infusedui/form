@@ -1,6 +1,6 @@
 export interface TextAreaProps {
-  label: string;
-  content: string;
+  label?: string;
+  content: any;
   setContent: React.Dispatch<React.SetStateAction<string>>;
   error: string;
   maxLength?: number;
