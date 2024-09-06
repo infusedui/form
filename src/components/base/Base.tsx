@@ -36,12 +36,13 @@ export const InputBlock: React.FC<InputBlockProps> = ({
   children,
   error,
   maxLength,
+  className,
 }) => {
   return (
     <div
       className={`teaui form-input ${error ? "state-negative" : ""} ${
         maxLength ? "schema-max-length" : ""
-      }`}
+      } ${className}`}
     >
       {children}
       {error && typeof error === "string" && (
@@ -55,9 +56,10 @@ export const RadioCheckboxBlock: React.FC<RadioCheckboxBlockProps> = ({
   children,
   error,
   gridSize,
+  className,
 }) => {
   return (
-    <div className={`teaui form-container`}>
+    <div className={`teaui form-container ${className}`}>
       <div
         className={`teaui form-radio-grid ${
           error ? "state-negative" : ""
@@ -73,12 +75,13 @@ export const RadioCheckboxBlock: React.FC<RadioCheckboxBlockProps> = ({
 export const SelectBlock: React.FC<SelectBlockProps> = ({
   children,
   error,
+  className,
 }) => {
   return (
     <div
       className={`teaui form-input form-select ${
         error ? "state-negative" : ""
-      }`}
+      } ${className}`}
     >
       {children}
       <i className="icon teaui-icon-chevron-down"></i>

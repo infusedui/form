@@ -40,7 +40,11 @@ const Input: React.FC<InputProps> = ({
       tagline={tagline}
       required={required ? true : false}
     >
-      <InputBlock error={error || internError} maxLength={maxLength}>
+      <InputBlock
+        error={error || internError}
+        maxLength={maxLength}
+        className={className}
+      >
         <input
           disabled={locked ? true : false}
           type={type ? type : "text"}
@@ -51,7 +55,6 @@ const Input: React.FC<InputProps> = ({
           maxLength={maxLength && maxLength}
           placeholder={placeHolder ? placeHolder : ""}
           autoFocus={autofocus ? true : false}
-          className={className}
           onChange={(event) => {
             setContent(event.target.value);
 

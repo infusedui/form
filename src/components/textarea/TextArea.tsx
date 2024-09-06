@@ -21,7 +21,7 @@ const TextArea: React.FC<TextAreaProps> = ({
 
   return (
     <BaseBlock id={id} label={label} tagline={tagline} size={size}>
-      <InputBlock error={error}>
+      <InputBlock error={error} className={className}>
         <textarea
           disabled={locked ? locked : false}
           id={id}
@@ -31,7 +31,6 @@ const TextArea: React.FC<TextAreaProps> = ({
           maxLength={maxLength && maxLength}
           placeholder={placeHolder ? placeHolder : ""}
           rows={rows}
-          className={className}
           onChange={(event: React.ChangeEvent<HTMLTextAreaElement>) => {
             const target = event.target as HTMLTextAreaElement;
             setContent(target.value);

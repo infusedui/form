@@ -46,7 +46,7 @@ const DragAndDrop: React.FC<DragAndDropProps> = ({
 
   return (
     <BaseBlock id="" label={label} size={size}>
-      <InputBlock error={error}>
+      <InputBlock error={error} className={className}>
         <div className={`teaui form-drag-n-drop ${className}`}>
           <FileUploader
             handleChange={handleChange}

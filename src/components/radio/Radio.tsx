@@ -17,7 +17,11 @@ const Radio: React.FC<RadioProps> = ({
 
   return (
     <BaseBlock id={id} label={label} size={size}>
-      <RadioCheckboxBlock gridSize={gridSize} error={error}>
+      <RadioCheckboxBlock
+        className={className}
+        gridSize={gridSize}
+        error={error}
+      >
         {values.map((value: RadioValues, key) => (
           <div
             key={key}
