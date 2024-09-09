@@ -64,7 +64,7 @@ const DragAndDrop: React.FC<DragAndDropProps> = ({
                 } ici (${authorizedFiles.join(", ")})`}
               </p>
               <p>ou</p>
-              <button className="teaui cta level-tertiary">
+              <button className="teaui cta level-secondary">
                 {multipleUpload
                   ? "Choisir un ou plusieurs fichier(s)"
                   : "Choisir un fichier"}
