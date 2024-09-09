@@ -72,7 +72,7 @@ const DragAndDrop: React.FC<DragAndDropProps> = ({
             </div>
           </FileUploader>
           <p>
-            {files
+            {files && files.length > 0
               ? `Fichier${files.length > 1 ? "s" : ""} sélectionné${
                   files.length > 1 ? "s" : ""
                 } : ${fileLabel}.`
