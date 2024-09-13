@@ -259,9 +259,13 @@ export const DatePicker: React.FC<DatePickerProps> = ({
   }, [activeMonth, activeYear, blockedDate, disabled]);
 
   useEffect(() => {
-    setActiveMonth(new Date(content).getMonth());
-    setActiveYear(new Date(content).getFullYear());
-    setActiveDay(new Date(content).getDay());
+    setActiveMonth(
+      content ? new Date(content).getMonth() : new Date().getMonth()
+    );
+    setActiveYear(
+      content ? new Date(content).getFullYear() : new Date().getFullYear()
+    );
+    setActiveDay(content ? new Date(content).getDay() : new Date().getDay());
   }, [content]);
 
   return (
