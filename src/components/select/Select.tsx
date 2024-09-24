@@ -16,7 +16,7 @@ const Select: React.FC<SelectProps> = ({
 
   return (
     <BaseBlock id={id} label={label} size={size}>
-      <SelectBlock error={error}>
+      <SelectBlock error={error} className={className}>
         <select
           value={content}
           name={id}

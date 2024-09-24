@@ -23,7 +23,7 @@ const FileInput: React.FC<FileInputProps> = ({
       tagline={tagline}
       required={required}
     >
-      <InputBlock error={error}>
+      <InputBlock error={error} className={className}>
         <div className={`teaui form-file ${className}`}>
           <input
             type="file"

@@ -14,8 +14,8 @@ const Checkbox: React.FC<CheckboxProps> = ({
   const id = useId();
 
   return (
-    <InputBlock error={error}>
-      <div className={`teaui form-checkbox ${className}`}>
+    <InputBlock error={error} className={className}>
+      <div className={`teaui form-checkbox`}>
         <input
           type="checkbox"
           name={id}

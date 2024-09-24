@@ -46,7 +46,7 @@ const DragAndDrop: React.FC<DragAndDropProps> = ({
 
   return (
     <BaseBlock id="" label={label} size={size}>
-      <InputBlock error={error}>
+      <InputBlock error={error} className={className}>
         <div className={`teaui form-drag-n-drop ${className}`}>
           <FileUploader
             handleChange={handleChange}
@@ -64,7 +64,7 @@ const DragAndDrop: React.FC<DragAndDropProps> = ({
                 } ici (${authorizedFiles.join(", ")})`}
               </p>
               <p>ou</p>
-              <button className="teaui cta level-tertiary">
+              <button className="teaui cta level-secondary">
                 {multipleUpload
                   ? "Choisir un ou plusieurs fichier(s)"
                   : "Choisir un fichier"}
@@ -72,7 +72,7 @@ const DragAndDrop: React.FC<DragAndDropProps> = ({
             </div>
           </FileUploader>
           <p>
-            {files
+            {files && files.length > 0
               ? `Fichier${files.length > 1 ? "s" : ""} sélectionné${
                   files.length > 1 ? "s" : ""
                 } : ${fileLabel}.`

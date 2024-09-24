@@ -258,10 +258,20 @@ export const DatePicker: React.FC<DatePickerProps> = ({
     buildMonthDate();
   }, [activeMonth, activeYear, blockedDate, disabled]);
 
+  useEffect(() => {
+    setActiveMonth(
+      content ? new Date(content).getMonth() : new Date().getMonth()
+    );
+    setActiveYear(
+      content ? new Date(content).getFullYear() : new Date().getFullYear()
+    );
+    setActiveDay(content ? new Date(content).getDay() : new Date().getDay());
+  }, [content]);
+
   return (
     <BaseBlock id={id} size={size} label={label} required={required}>
-      <InputBlock error={error}>
-        <div className={`teaui datepicker-root-input ${className}`}>
+      <InputBlock error={error} className={className}>
+        <div className={`teaui datepicker-root-input`}>
           <input
             disabled={locked ? locked : false}
             name={id}

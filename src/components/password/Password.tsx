@@ -30,7 +30,7 @@ const Password: React.FC<PasswordProps> = ({
 
   return (
     <BaseBlock id={id} label={label} tagline={tagline} size={size}>
-      <InputBlock error={error}>
+      <InputBlock error={error} className={className}>
         <div
           className={`teaui form-password ${className}`}
           onMouseLeave={() => {
