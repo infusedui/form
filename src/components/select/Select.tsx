@@ -11,6 +11,7 @@ const Select: React.FC<SelectProps> = ({
   children,
   locked,
   className,
+  name,
 }) => {
   const id = useId();
 
@@ -19,7 +20,7 @@ const Select: React.FC<SelectProps> = ({
       <SelectBlock error={error} className={className}>
         <select
           value={content}
-          name={id}
+          name={name ? name : id}
           id={id}
           onChange={(event) => {
             setContent(event.target.value);
