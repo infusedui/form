@@ -30,6 +30,15 @@ const Input: React.FC<TagInputProps> = ({
     }
   };
 
+  const handleOut = (event: React.FocusEvent<HTMLInputElement, Element>) => {
+    const target = event.target as HTMLInputElement;
+
+    if (target.value) {
+      setContent([...content, target.value.trim()]);
+      target.value = "";
+    }
+  };
+
   return (
     <BaseBlock
       id={id}
@@ -46,6 +55,7 @@ const Input: React.FC<TagInputProps> = ({
           readOnly={readOnly ? true : false}
           placeholder={placeHolder ? placeHolder : ""}
           autoFocus={autofocus ? true : false}
+          onBlur={handleOut}
           onKeyUp={handleKey}
         />
       </InputBlock>
