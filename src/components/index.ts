@@ -15,3 +15,4 @@ export * from "./draganddrop";
 export * from "./totpinput";
 export * from "./taginput";
 export * from "./progress";
+export * from "./adress";
