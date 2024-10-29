@@ -1,6 +1,6 @@
 {
   "name": "@infusedui/form",
-  "version": "2.3.3",
+  "version": "2.3.4",
   "description": "",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
@@ -47,7 +47,7 @@
   },
   "dependencies": {
     "@infusedui/core": "^1.6.0",
-    "react-drag-drop-files": "^2.3.10",
+    "react-drag-drop-files": "^2.4.0",
     "ldrs": "^1.0.2"
   }
 }
