@@ -2,6 +2,7 @@ import { DayArrayProps, DatePickerProps } from "./DatePicker.types";
 import React, { useState, useId, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { BaseBlock, InputBlock } from "../base/Base";
+import { Calendar } from "../../class/DatePicker.class";
 
 export const DatePicker: React.FC<DatePickerProps> = ({
   content,
@@ -18,6 +19,8 @@ export const DatePicker: React.FC<DatePickerProps> = ({
   disabledTodayButton = false,
 }) => {
   const id = useId();
+  const calendar = new Calendar();
+
   const [openCalendar, setOpenCalendar] = useState<boolean>(false);
   const [activeMonth, setActiveMonth] = useState<number>(
     content ? new Date(content).getMonth() : new Date().getMonth()
@@ -29,11 +32,11 @@ export const DatePicker: React.FC<DatePickerProps> = ({
     content ? new Date(content).getDay() : new Date().getDay()
   );
 
-  const [monthList] = useState<number[]>([
-    0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11,
-  ]);
-  const [monthDayList, setMonthDayList] = useState<DayArrayProps[]>([]);
-  const [yearList, setYearList] = useState<number[]>([]);
+  // const [monthList] = useState<number[]>([
+  //   0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11,
+  // ]);
+  // const [monthDayList, setMonthDayList] = useState<DayArrayProps[]>([]);
+  // const [yearList, setYearList] = useState<number[]>([]);
 
   const interpreterMonth = (month: number) => {
     switch (month) {
@@ -90,183 +93,183 @@ export const DatePicker: React.FC<DatePickerProps> = ({
     }
   };
 
-  const classBuilder = (day: number) => {
-    let classString: string[] = [];
-    const today = new Date().toLocaleDateString("fr-FR");
+  // const classBuilder = (day: number) => {
+  //   let classString: string[] = [];
+  //   const today = new Date().toLocaleDateString("fr-FR");
 
-    if (
-      content ===
-      `${activeYear}-${
-        activeMonth + 1 < 10 ? `0${activeMonth + 1}` : activeMonth + 1
-      }-${day < 10 ? `0${day}` : day}`
-    ) {
-      classString.push(`active`);
-    }
+  //   if (
+  //     content ===
+  //     `${activeYear}-${
+  //       activeMonth + 1 < 10 ? `0${activeMonth + 1}` : activeMonth + 1
+  //     }-${day < 10 ? `0${day}` : day}`
+  //   ) {
+  //     classString.push(`active`);
+  //   }
 
-    if (
-      today ===
-      `${day < 10 ? `0${day}` : day}/${
-        activeMonth + 1 < 10 ? `0${activeMonth + 1}` : activeMonth + 1
-      }/${activeYear}`
-    ) {
-      classString.push(`today`);
-    }
+  //   if (
+  //     today ===
+  //     `${day < 10 ? `0${day}` : day}/${
+  //       activeMonth + 1 < 10 ? `0${activeMonth + 1}` : activeMonth + 1
+  //     }/${activeYear}`
+  //   ) {
+  //     classString.push(`today`);
+  //   }
 
-    return classString.join(" ");
-  };
+  //   return classString.join(" ");
+  // };
 
-  useEffect(() => {
-    const buildYear = () => {
-      const yearList: number[] = [];
+  // useEffect(() => {
+  //   const buildYear = () => {
+  //     const yearList: number[] = [];
 
-      for (let i = 1900; i < activeYear + 10; i++) {
-        yearList.push(i);
-      }
+  //     for (let i = 1900; i < activeYear + 10; i++) {
+  //       yearList.push(i);
+  //     }
 
-      setYearList(yearList);
-    };
+  //     setYearList(yearList);
+  //   };
 
-    buildYear();
-  }, [activeYear]);
+  //   buildYear();
+  // }, [activeYear]);
 
-  useEffect(() => {
-    const pushEmptyDay = (quantity: number, list: DayArrayProps[]) => {
-      for (let i = 0; i < quantity; i++) {
-        list.push({ day: 0 });
-      }
-    };
+  // useEffect(() => {
+  //   const pushEmptyDay = (quantity: number, list: DayArrayProps[]) => {
+  //     for (let i = 0; i < quantity; i++) {
+  //       list.push({ day: 0 });
+  //     }
+  //   };
 
-    const buildMonthDate = () => {
-      const monthDateList: DayArrayProps[] = [];
-      const firstDay = new Date(`${activeYear}-${activeMonth + 1}-01`).getDay();
-      const today = new Date();
+  //   const buildMonthDate = () => {
+  //     const monthDateList: DayArrayProps[] = [];
+  //     const firstDay = new Date(`${activeYear}-${activeMonth + 1}-01`).getDay();
+  //     const today = new Date();
 
-      switch (firstDay) {
-        case 0:
-          pushEmptyDay(6, monthDateList);
-          break;
-        case 2:
-          pushEmptyDay(1, monthDateList);
-          break;
-        case 3:
-          pushEmptyDay(2, monthDateList);
-          break;
-        case 4:
-          pushEmptyDay(3, monthDateList);
-          break;
-        case 5:
-          pushEmptyDay(4, monthDateList);
-          break;
-        case 6:
-          pushEmptyDay(5, monthDateList);
-          break;
-      }
+  //     switch (firstDay) {
+  //       case 0:
+  //         pushEmptyDay(6, monthDateList);
+  //         break;
+  //       case 2:
+  //         pushEmptyDay(1, monthDateList);
+  //         break;
+  //       case 3:
+  //         pushEmptyDay(2, monthDateList);
+  //         break;
+  //       case 4:
+  //         pushEmptyDay(3, monthDateList);
+  //         break;
+  //       case 5:
+  //         pushEmptyDay(4, monthDateList);
+  //         break;
+  //       case 6:
+  //         pushEmptyDay(5, monthDateList);
+  //         break;
+  //     }
 
-      for (let i = 1; i < 32; i++) {
-        const actualDay = new Date(`${activeYear}-${activeMonth + 1}-${i}`);
-        const stringDate = `${actualDay.getFullYear()}-${
-          actualDay.getMonth() + 1 < 10
-            ? `0${actualDay.getMonth() + 1}`
-            : actualDay.getMonth() + 1
-        }-${
-          actualDay.getDate() < 10
-            ? `0${actualDay.getDate()}`
-            : actualDay.getDate()
-        }`;
+  //     for (let i = 1; i < 32; i++) {
+  //       const actualDay = new Date(`${activeYear}-${activeMonth + 1}-${i}`);
+  //       const stringDate = `${actualDay.getFullYear()}-${
+  //         actualDay.getMonth() + 1 < 10
+  //           ? `0${actualDay.getMonth() + 1}`
+  //           : actualDay.getMonth() + 1
+  //       }-${
+  //         actualDay.getDate() < 10
+  //           ? `0${actualDay.getDate()}`
+  //           : actualDay.getDate()
+  //       }`;
 
-        if (i === actualDay.getDate()) {
-          if (
-            disabled &&
-            disabled?.indexOf("weekend") >= 0 &&
-            (actualDay.getDay() === 6 || actualDay.getDay() === 0)
-          ) {
-            // lock weekend
-            monthDateList.push({ day: actualDay.getDate(), disabled: true });
-          } else if (
-            disabled &&
-            disabled?.indexOf("sunday") >= 0 &&
-            actualDay.getDay() === 0
-          ) {
-            // lock sunday
-            monthDateList.push({ day: actualDay.getDate(), disabled: true });
-          } else if (
-            disabled &&
-            disabled?.indexOf("monday") >= 0 &&
-            actualDay.getDay() === 1
-          ) {
-            // lock sunday
-            monthDateList.push({ day: actualDay.getDate(), disabled: true });
-          } else if (
-            disabled &&
-            disabled?.indexOf("tuesday") >= 0 &&
-            actualDay.getDay() === 2
-          ) {
-            // lock sunday
-            monthDateList.push({ day: actualDay.getDate(), disabled: true });
-          } else if (
-            disabled &&
-            disabled?.indexOf("wednesday") >= 0 &&
-            actualDay.getDay() === 3
-          ) {
-            // lock sunday
-            monthDateList.push({ day: actualDay.getDate(), disabled: true });
-          } else if (
-            disabled &&
-            disabled?.indexOf("thursday") >= 0 &&
-            actualDay.getDay() === 4
-          ) {
-            // lock sunday
-            monthDateList.push({ day: actualDay.getDate(), disabled: true });
-          } else if (
-            disabled &&
-            disabled?.indexOf("friday") >= 0 &&
-            actualDay.getDay() === 5
-          ) {
-            // lock sunday
-            monthDateList.push({ day: actualDay.getDate(), disabled: true });
-          } else if (
-            disabled &&
-            disabled?.indexOf("saturday") >= 0 &&
-            actualDay.getDay() === 6
-          ) {
-            // lock sunday
-            monthDateList.push({ day: actualDay.getDate(), disabled: true });
-          } else if (
-            disabled &&
-            disabled?.indexOf("old") >= 0 &&
-            (actualDay.getFullYear() < today.getFullYear() ||
-              (actualDay.getFullYear() === today.getFullYear() &&
-                actualDay.getMonth() < today.getMonth()) ||
-              (actualDay.getFullYear() === today.getFullYear() &&
-                actualDay.getMonth() === today.getMonth() &&
-                actualDay.getDate() < today.getDate()))
-          ) {
-            monthDateList.push({ day: actualDay.getDate(), disabled: true });
-          } else {
-            if (blockedDate && blockedDate.indexOf(stringDate) >= 0) {
-              monthDateList.push({ day: actualDay.getDate(), disabled: true });
-            } else {
-              monthDateList.push({ day: actualDay.getDate() });
-            }
-          }
-        }
-      }
+  //       if (i === actualDay.getDate()) {
+  //         if (
+  //           disabled &&
+  //           disabled?.indexOf("weekend") >= 0 &&
+  //           (actualDay.getDay() === 6 || actualDay.getDay() === 0)
+  //         ) {
+  //           // lock weekend
+  //           monthDateList.push({ day: actualDay.getDate(), disabled: true });
+  //         } else if (
+  //           disabled &&
+  //           disabled?.indexOf("sunday") >= 0 &&
+  //           actualDay.getDay() === 0
+  //         ) {
+  //           // lock sunday
+  //           monthDateList.push({ day: actualDay.getDate(), disabled: true });
+  //         } else if (
+  //           disabled &&
+  //           disabled?.indexOf("monday") >= 0 &&
+  //           actualDay.getDay() === 1
+  //         ) {
+  //           // lock sunday
+  //           monthDateList.push({ day: actualDay.getDate(), disabled: true });
+  //         } else if (
+  //           disabled &&
+  //           disabled?.indexOf("tuesday") >= 0 &&
+  //           actualDay.getDay() === 2
+  //         ) {
+  //           // lock sunday
+  //           monthDateList.push({ day: actualDay.getDate(), disabled: true });
+  //         } else if (
+  //           disabled &&
+  //           disabled?.indexOf("wednesday") >= 0 &&
+  //           actualDay.getDay() === 3
+  //         ) {
+  //           // lock sunday
+  //           monthDateList.push({ day: actualDay.getDate(), disabled: true });
+  //         } else if (
+  //           disabled &&
+  //           disabled?.indexOf("thursday") >= 0 &&
+  //           actualDay.getDay() === 4
+  //         ) {
+  //           // lock sunday
+  //           monthDateList.push({ day: actualDay.getDate(), disabled: true });
+  //         } else if (
+  //           disabled &&
+  //           disabled?.indexOf("friday") >= 0 &&
+  //           actualDay.getDay() === 5
+  //         ) {
+  //           // lock sunday
+  //           monthDateList.push({ day: actualDay.getDate(), disabled: true });
+  //         } else if (
+  //           disabled &&
+  //           disabled?.indexOf("saturday") >= 0 &&
+  //           actualDay.getDay() === 6
+  //         ) {
+  //           // lock sunday
+  //           monthDateList.push({ day: actualDay.getDate(), disabled: true });
+  //         } else if (
+  //           disabled &&
+  //           disabled?.indexOf("old") >= 0 &&
+  //           (actualDay.getFullYear() < today.getFullYear() ||
+  //             (actualDay.getFullYear() === today.getFullYear() &&
+  //               actualDay.getMonth() < today.getMonth()) ||
+  //             (actualDay.getFullYear() === today.getFullYear() &&
+  //               actualDay.getMonth() === today.getMonth() &&
+  //               actualDay.getDate() < today.getDate()))
+  //         ) {
+  //           monthDateList.push({ day: actualDay.getDate(), disabled: true });
+  //         } else {
+  //           if (blockedDate && blockedDate.indexOf(stringDate) >= 0) {
+  //             monthDateList.push({ day: actualDay.getDate(), disabled: true });
+  //           } else {
+  //             monthDateList.push({ day: actualDay.getDate() });
+  //           }
+  //         }
+  //       }
+  //     }
 
-      setMonthDayList(monthDateList);
-    };
+  //     setMonthDayList(monthDateList);
+  //   };
 
-    buildMonthDate();
-  }, [activeMonth, activeYear, blockedDate, disabled]);
+  //   buildMonthDate();
+  // }, [activeMonth, activeYear, blockedDate, disabled]);
 
-  useEffect(() => {
-    setActiveMonth(
-      content ? new Date(content).getMonth() : new Date().getMonth()
-    );
-    setActiveYear(
-      content ? new Date(content).getFullYear() : new Date().getFullYear()
-    );
-    setActiveDay(content ? new Date(content).getDay() : new Date().getDay());
-  }, [content]);
+  // useEffect(() => {
+  //   setActiveMonth(
+  //     content ? new Date(content).getMonth() : new Date().getMonth()
+  //   );
+  //   setActiveYear(
+  //     content ? new Date(content).getFullYear() : new Date().getFullYear()
+  //   );
+  //   setActiveDay(content ? new Date(content).getDay() : new Date().getDay());
+  // }, [content]);
 
   return (
     <BaseBlock id={id} size={size} label={label} required={required}>
