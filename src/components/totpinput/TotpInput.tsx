@@ -63,6 +63,7 @@ const TotpInput: React.FC<TotpInputProps> = ({
                 onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
                   inputHandler(key, event.target.value)
                 }
+                autoComplete="one-time-code"
                 readOnly={locked ? locked : false}
                 onKeyDown={(event) => handleKeyDown(key, event)}
               />
