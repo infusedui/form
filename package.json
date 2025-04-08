@@ -1,6 +1,6 @@
 {
   "name": "@infusedui/form",
-  "version": "2.3.3",
+  "version": "2.3.6",
   "description": "",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
@@ -24,30 +24,28 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@rollup/plugin-commonjs": "^25.0.8",
-    "@rollup/plugin-node-resolve": "^15.2.3",
+    "@rollup/plugin-commonjs": "^28.0.3",
+    "@rollup/plugin-node-resolve": "^16.0.1",
     "@rollup/plugin-terser": "^0.4.4",
-    "@rollup/plugin-typescript": "^11.1.6",
-    "@types/react": "^18.3.3",
-    "framer-motion": "^11.2.10",
-    "react": "^18.3.1",
-    "react-router-dom": "^6.23.1",
-    "rollup": "^4.22.4",
-    "rollup-plugin-dts": "^6.1.1",
+    "@rollup/plugin-typescript": "^12.1.2",
+    "@types/react": "^19.0.12",
+    "framer-motion": "^12.6.2",
+    "rollup": "^4.38.0",
+    "rollup-plugin-dts": "^6.2.1",
     "rollup-plugin-peer-deps-external": "^2.2.4",
     "rollup-plugin-postcss": "^4.0.2",
-    "rollup-plugin-sass": "^1.12.22",
-    "rollup-plugin-scss": "^3.0.0",
-    "sass": "^1.77.4",
+    "rollup-plugin-sass": "^1.15.2",
+    "rollup-plugin-scss": "^4.0.1",
+    "sass": "^1.86.0",
     "scss": "^0.2.4",
-    "simplebar-react": "^3.2.5",
-    "tslib": "^2.6.2",
-    "typed-scss-modules": "^8.0.1",
-    "typescript": "^5.4.5"
+    "simplebar-react": "^3.3.0",
+    "tslib": "^2.8.1",
+    "typed-scss-modules": "^8.1.1",
+    "typescript": "^5.8.2"
   },
   "dependencies": {
-    "@infusedui/core": "^1.6.0",
-    "react-drag-drop-files": "^2.3.10",
-    "ldrs": "^1.0.2"
+    "@infusedui/core": "^2.3.0",
+    "ldrs": "^1.1.6",
+    "react-drag-drop-files": "^3.0.0"
   }
 }

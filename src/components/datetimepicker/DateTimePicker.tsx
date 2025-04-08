@@ -1,10 +1,9 @@
-import { DayArrayProps, DatePickerProps } from "./DatePicker.types";
+import { DayArrayProps, DateTimePickerProps } from "./DateTimePicker.types";
 import React, { useState, useId, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { BaseBlock, InputBlock } from "../base/Base";
-import { Calendar } from "../../class/DatePicker.class";
 
-export const DatePicker: React.FC<DatePickerProps> = ({
+export const DateTimePicker: React.FC<DateTimePickerProps> = ({
   content,
   setContent,
   error,
@@ -19,8 +18,6 @@ export const DatePicker: React.FC<DatePickerProps> = ({
   disabledTodayButton = false,
 }) => {
   const id = useId();
-  const calendar = new Calendar();
-
   const [openCalendar, setOpenCalendar] = useState<boolean>(false);
   const [activeMonth, setActiveMonth] = useState<number>(
     content ? new Date(content).getMonth() : new Date().getMonth()
@@ -274,13 +271,13 @@ export const DatePicker: React.FC<DatePickerProps> = ({
   return (
     <BaseBlock id={id} size={size} label={label} required={required}>
       <InputBlock error={error} className={className}>
-        <div className={`infusedui datepicker-root-input`}>
+        <div className={`teaui dateTimepicker-root-input`}>
           <input
             disabled={locked ? locked : false}
             name={id}
             id={id}
             readOnly={readOnly ? readOnly : false}
-            type="date"
+            type="local-datetime"
             value={content ? content : ""}
             onFocus={() => {
               setOpenCalendar(true);
@@ -303,102 +300,118 @@ export const DatePicker: React.FC<DatePickerProps> = ({
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="infusedui datepicker-calendar-root"
+              className="teaui dateTimepicker-calendar-root"
             >
-              <div className="infusedui datepicker-calendar-month">
-                <button onClick={prevMonth}>
-                  <i className="icon teaui-icon-carret-left"></i>
-                </button>
-                <div>
-                  {!disabledTodayButton &&
-                    (new Date().getMonth() !== activeMonth ||
-                      new Date().getFullYear() !== activeYear) && (
-                      <button
-                        onClick={(
-                          event: React.MouseEvent<HTMLButtonElement, MouseEvent>
-                        ) => {
-                          event.preventDefault();
-                          const today = new Date();
+              <div>
+                <div className="teaui infusedui datePickerCalendar dateTimepicker-calendar-month">
+                  <button onClick={prevMonth}>
+                    <i className="icon teaui-icon-carret-left"></i>
+                  </button>
+                  <div>
+                    {!disabledTodayButton &&
+                      (new Date().getMonth() !== activeMonth ||
+                        new Date().getFullYear() !== activeYear) && (
+                        <button
+                          onClick={(
+                            event: React.MouseEvent<
+                              HTMLButtonElement,
+                              MouseEvent
+                            >
+                          ) => {
+                            event.preventDefault();
+                            const today = new Date();
 
-                          setActiveMonth(today.getMonth());
-                          setActiveYear(today.getFullYear());
-                        }}
-                      >
-                        Aujourd'hui
-                      </button>
-                    )}
-                  <select
-                    className="infusedui margin-8-right"
-                    value={activeMonth}
-                    onChange={(event: React.ChangeEvent<HTMLSelectElement>) => {
-                      const target = event.target as HTMLSelectElement;
-                      setActiveMonth(parseInt(target.value));
-                    }}
-                  >
-                    {monthList.map((month) => (
-                      <option key={month} value={month}>
-                        {interpreterMonth(month)}
-                      </option>
-                    ))}
-                  </select>
-                  <select
-                    value={activeYear}
-                    onChange={(event: React.ChangeEvent<HTMLSelectElement>) => {
-                      const target = event.target as HTMLSelectElement;
-                      setActiveYear(parseInt(target.value));
-                    }}
-                  >
-                    {yearList.map((year) => (
-                      <option key={year} value={year}>
-                        {year}
-                      </option>
-                    ))}
-                  </select>
+                            setActiveMonth(today.getMonth());
+                            setActiveYear(today.getFullYear());
+                          }}
+                        >
+                          Aujourd'hui
+                        </button>
+                      )}
+                    <select
+                      className="teaui margin-8-right"
+                      value={activeMonth}
+                      onChange={(
+                        event: React.ChangeEvent<HTMLSelectElement>
+                      ) => {
+                        const target = event.target as HTMLSelectElement;
+                        setActiveMonth(parseInt(target.value));
+                      }}
+                    >
+                      {monthList.map((month) => (
+                        <option key={month} value={month}>
+                          {interpreterMonth(month)}
+                        </option>
+                      ))}
+                    </select>
+                    <select
+                      value={activeYear}
+                      onChange={(
+                        event: React.ChangeEvent<HTMLSelectElement>
+                      ) => {
+                        const target = event.target as HTMLSelectElement;
+                        setActiveYear(parseInt(target.value));
+                      }}
+                    >
+                      {yearList.map((year) => (
+                        <option key={year} value={year}>
+                          {year}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                  <button onClick={nextMonth}>
+                    <i className="icon teaui-icon-carret-right"></i>
+                  </button>
                 </div>
-                <button onClick={nextMonth}>
-                  <i className="icon teaui-icon-carret-right"></i>
-                </button>
-              </div>
-              <div className="infusedui datepicker-calendar-days">
-                <div className="infusedui datepicker-day-label">
-                  <span>L</span>
-                  <span>M</span>
-                  <span>M</span>
-                  <span>J</span>
-                  <span>V</span>
-                  <span>S</span>
-                  <span>D</span>
-                </div>
+                <div className="teaui dateTimepicker-calendar-days">
+                  <div className="teaui dateTimepicker-day-label">
+                    <span>L</span>
+                    <span>M</span>
+                    <span>M</span>
+                    <span>J</span>
+                    <span>V</span>
+                    <span>S</span>
+                    <span>D</span>
+                  </div>
 
-                {monthDayList.map((day, key) => {
-                  if (day.day) {
-                    return (
-                      <button
-                        className={classBuilder(day.day)}
-                        disabled={day.disabled ? true : false}
-                        onClick={(
-                          event: React.MouseEvent<HTMLButtonElement, MouseEvent>
-                        ) => {
-                          event.preventDefault();
-                          setContent(
-                            `${activeYear}-${
-                              activeMonth + 1 < 10
-                                ? `0${activeMonth + 1}`
-                                : activeMonth + 1
-                            }-${day.day < 10 ? `0${day.day}` : day.day}`
-                          );
-                          setActiveDay(day.day);
-                          setOpenCalendar(false);
-                        }}
-                        key={key}
-                      >
-                        {day.day}
-                      </button>
-                    );
-                  } else {
-                    return <span key={key}></span>;
-                  }
-                })}
+                  {monthDayList.map((day, key) => {
+                    if (day.day) {
+                      return (
+                        <button
+                          className={classBuilder(day.day)}
+                          disabled={day.disabled ? true : false}
+                          onClick={(
+                            event: React.MouseEvent<
+                              HTMLButtonElement,
+                              MouseEvent
+                            >
+                          ) => {
+                            event.preventDefault();
+                            setContent(
+                              `${activeYear}-${
+                                activeMonth + 1 < 10
+                                  ? `0${activeMonth + 1}`
+                                  : activeMonth + 1
+                              }-${day.day < 10 ? `0${day.day}` : day.day}`
+                            );
+                            setActiveDay(day.day);
+                            setOpenCalendar(false);
+                          }}
+                          key={key}
+                        >
+                          {day.day}
+                        </button>
+                      );
+                    } else {
+                      return <span key={key}></span>;
+                    }
+                  })}
+                </div>
+                <div className="infusedui datePickerClock">
+                  <div className="infusedui datePickerClockHours"></div>
+                  <div className="infusedui datePickerClockMinutes"></div>
+                </div>
               </div>
             </motion.div>
           )}
@@ -408,4 +421,4 @@ export const DatePicker: React.FC<DatePickerProps> = ({
   );
 };
 
-export default DatePicker;
+export default DateTimePicker;
