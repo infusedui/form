@@ -95,7 +95,7 @@ export const DatePicker: React.FC<DatePickerProps> = ({
 
   const classBuilder = (day: number) => {
     let classString: string[] = [];
-    const today = new Date().toLocaleDateString("fr-FR");
+    const today = new Date().toLocaleDateString();
 
     if (
       content ===
@@ -274,7 +274,7 @@ export const DatePicker: React.FC<DatePickerProps> = ({
   return (
     <BaseBlock id={id} size={size} label={label} required={required}>
       <InputBlock error={error} className={className}>
-        <div className={`infusedui datepicker-root-input`}>
+        <div className={`infusedui-datepicker-root-input`}>
           <input
             disabled={locked ? locked : false}
             name={id}
@@ -288,6 +288,9 @@ export const DatePicker: React.FC<DatePickerProps> = ({
             onChange={(event) => {
               const target = event.target as HTMLInputElement;
               setContent(target.value);
+            }}
+            onBlur={() => {
+              setOpenCalendar(false);
             }}
           />
           <i
@@ -303,9 +306,9 @@ export const DatePicker: React.FC<DatePickerProps> = ({
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="infusedui datepicker-calendar-root"
+              className="infusedui-datepicker-calendar-root"
             >
-              <div className="infusedui datepicker-calendar-month">
+              <div className="infusedui-datepicker-calendar-month">
                 <button onClick={prevMonth}>
                   <i className="icon teaui-icon-carret-left"></i>
                 </button>
@@ -328,7 +331,7 @@ export const DatePicker: React.FC<DatePickerProps> = ({
                       </button>
                     )}
                   <select
-                    className="infusedui margin-8-right"
+                    className="as-mr8"
                     value={activeMonth}
                     onChange={(event: React.ChangeEvent<HTMLSelectElement>) => {
                       const target = event.target as HTMLSelectElement;
@@ -359,8 +362,8 @@ export const DatePicker: React.FC<DatePickerProps> = ({
                   <i className="icon teaui-icon-carret-right"></i>
                 </button>
               </div>
-              <div className="infusedui datepicker-calendar-days">
-                <div className="infusedui datepicker-day-label">
+              <div className="infusedui-datepicker-calendar-days">
+                <div className="infusedui-datepicker-day-label">
                   <span>L</span>
                   <span>M</span>
                   <span>M</span>
