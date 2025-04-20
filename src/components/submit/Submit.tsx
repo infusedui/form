@@ -19,7 +19,10 @@ const Submit: React.FC<SubmitProps> = ({
       }
     >
       {children}
-      <button disabled={loading || locked ? true : false}>
+      <button
+        className="teaui cta level-primary format-icon-right"
+        disabled={loading || locked ? true : false}
+      >
         <span>{label}</span>
         <i className="icon teaui-icon-arrow-right"></i>
         {loading && <Loader />}
