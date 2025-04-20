@@ -235,14 +235,25 @@ export const DatePicker: React.FC<DatePickerProps> = ({
             // lock sunday
             monthDateList.push({ day: actualDay.getDate(), disabled: true });
           } else if (
-            disabled &&
-            disabled?.indexOf("old") >= 0 &&
+            ((disabled && disabled?.indexOf("old") >= 0) ||
+              (disabled && disabled?.indexOf("past") >= 0)) &&
             (actualDay.getFullYear() < today.getFullYear() ||
               (actualDay.getFullYear() === today.getFullYear() &&
                 actualDay.getMonth() < today.getMonth()) ||
               (actualDay.getFullYear() === today.getFullYear() &&
                 actualDay.getMonth() === today.getMonth() &&
                 actualDay.getDate() < today.getDate()))
+          ) {
+            monthDateList.push({ day: actualDay.getDate(), disabled: true });
+          } else if (
+            disabled &&
+            disabled?.indexOf("futur") >= 0 &&
+            (actualDay.getFullYear() > today.getFullYear() ||
+              (actualDay.getFullYear() === today.getFullYear() &&
+                actualDay.getMonth() > today.getMonth()) ||
+              (actualDay.getFullYear() === today.getFullYear() &&
+                actualDay.getMonth() === today.getMonth() &&
+                actualDay.getDate() > today.getDate()))
           ) {
             monthDateList.push({ day: actualDay.getDate(), disabled: true });
           } else {
