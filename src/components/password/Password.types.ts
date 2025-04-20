@@ -1,6 +1,6 @@
 export interface PasswordProps {
   label: string;
-  content: string;
+  content: any;
   setContent: React.Dispatch<React.SetStateAction<string>>;
   error: string;
   size?: number;
