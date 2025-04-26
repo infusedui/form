@@ -14,8 +14,8 @@ const Submit: React.FC<SubmitProps> = ({
     <div
       className={
         size
-          ? `infusedui grid template-cta-container ha-end size-${size}x ${className}`
-          : `infusedui grid template-cta-container ha-end ${className}`
+          ? `infusedui teaui grid cta-container ha-end size-${size}x ${className}`
+          : `infusedui teaui grid cta-container ha-end ${className}`
       }
     >
       {children}
