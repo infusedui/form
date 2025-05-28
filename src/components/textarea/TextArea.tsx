@@ -1,4 +1,4 @@
-import { useId, useState } from "react";
+import { useEffect, useId, useState } from "react";
 import { TextAreaProps } from "./TextArea.types";
 import { BaseBlock, InputBlock } from "../base/Base";
 
@@ -18,6 +18,10 @@ const TextArea: React.FC<TextAreaProps> = ({
 }) => {
   const id = useId();
   const [actualContentSize, setActualContentSize] = useState(0);
+
+  useEffect(() => {
+    setActualContentSize(content.length);
+  }, [content]);
 
   return (
     <BaseBlock id={id} label={label} tagline={tagline} size={size}>
