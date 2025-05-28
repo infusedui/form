@@ -6,4 +6,5 @@ export interface CheckboxSliderProps {
   value?: string | number;
   locked?: boolean;
   className?: string;
+  loading?: boolean;
 }

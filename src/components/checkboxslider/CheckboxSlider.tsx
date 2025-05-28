@@ -9,11 +9,12 @@ const CheckboxSlider: React.FC<CheckboxSliderProps> = ({
   setContent,
   locked,
   className,
+  loading,
 }) => {
   const id = useId();
 
   return (
-    <div className={`infusedui-slider`}>
+    <div className={`infusedui-slider ${loading ? "state-loader" : ""}`}>
       <input
         type="checkbox"
         name={id}
