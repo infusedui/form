@@ -2,7 +2,7 @@ export interface TagInputProps {
   content: string[];
   setContent: React.Dispatch<React.SetStateAction<string[]>>;
   error: any;
-  separator: string[];
+  separator?: string[];
   label?: string;
   size?: number;
   readOnly?: boolean;
