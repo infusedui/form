@@ -1,6 +1,6 @@
 export interface FileInputProps {
   setContent: React.Dispatch<React.SetStateAction<null | FileList | File>>;
-  error: string;
+  error: any;
   accept: string[];
   label?: string;
   size?: number;
