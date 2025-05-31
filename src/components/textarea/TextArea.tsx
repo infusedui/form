@@ -1,4 +1,4 @@
-import { useEffect, useId, useState } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 import { TextAreaProps } from "./TextArea.types";
 import { BaseBlock, InputBlock } from "../base/Base";
 
@@ -15,11 +15,24 @@ const TextArea: React.FC<TextAreaProps> = ({
   locked,
   rows,
   className,
+  resizable,
 }) => {
   const id = useId();
+  const ref = useRef<HTMLTextAreaElement>(null);
   const [actualContentSize, setActualContentSize] = useState(0);
 
+  const resize = () => {
+    if (resizable) {
+      const el = ref.current;
+      if (el) {
+        el.style.height = "auto";
+        el.style.height = `${el.scrollHeight}px`;
+      }
+    }
+  };
+
   useEffect(() => {
+    resize();
     setActualContentSize(content.length);
   }, [content]);
 
@@ -27,6 +40,7 @@ const TextArea: React.FC<TextAreaProps> = ({
     <BaseBlock id={id} label={label} tagline={tagline} size={size}>
       <InputBlock error={error} className={className}>
         <textarea
+          ref={ref}
           disabled={locked ? locked : false}
           id={id}
           name={id}

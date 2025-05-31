@@ -11,4 +11,5 @@ export interface TextAreaProps {
   locked?: boolean;
   rows?: number;
   className?: string;
+  resizable?: boolean;
 }
