@@ -1,6 +1,5 @@
 import { SubmitProps } from "./Submit.types";
 import { Loader } from "@infusedui/core";
-import "@infusedui/core/dist/infusedui.style.css";
 
 const Submit: React.FC<SubmitProps> = ({
   size,
